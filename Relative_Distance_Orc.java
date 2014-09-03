@@ -4,10 +4,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /***********************
+ * The section has been merged into Relative_Distance_Eaton.java;
+ * 
  * the csv file: eaton_acs_filter_rDNA_match_oridb_acs_238_sites.csv 
  * This is a CSV file listing 238 replication initiation sites in yeast 
  * by chromosome, position, and strand.  
