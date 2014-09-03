@@ -63,7 +63,7 @@ public class Relative_Distance_Eaton {
 		
 		//4th, assign name and absDistance to current Chromatin;
 		currChr.name = splitLine[1];
-		int absDis = Integer.parseInt(splitLine[2]);
+		long absDis = Integer.parseInt(splitLine[2]);
 		if(splitLine[3].equals("-")) absDis = -absDis;
 		currChr.Position.add(absDis);
 		
@@ -87,13 +87,13 @@ public class Relative_Distance_Eaton {
 			
 			if(nextChr.name.equals(currChr.name)){
 				
-				int nextAbsDis = Integer.parseInt(split[2]);
+				Long nextAbsDis = Long.parseLong(split[2]);
 				if(split[3].equals("-")) nextAbsDis = -nextAbsDis;
 				ChrArrayList.get(lastIndex).Position.add(nextAbsDis);
 			
 			} else { 
 				
-				int nextAbsDis = Integer.parseInt(split[2]);
+				Long nextAbsDis = Long.parseLong(split[2]);
 				if(split[3].equals("-")) nextAbsDis = -nextAbsDis;
 				
 				nextChr.Position.add(nextAbsDis);
@@ -134,7 +134,7 @@ public class Relative_Distance_Eaton {
 		
 		
 		//7th, create a file to write all outputs:
-		File output_file = new File("orc_output_big.csv");
+		File output_file = new File("orc_output_small.csv");
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));
 		
 		//write the titles for each column;
@@ -165,12 +165,12 @@ public class Relative_Distance_Eaton {
 			 * So, here I choose to close the output writer, then nothing will be written into
 			 * the output.csv file;
 			 */
-			if(chr_number > 16 ) output.close();
+		//	if(chr_number > 16 ) output.close();
 			
 			//get the chromation object from ChrArrayList, according to chr_number; 
 			index = chr_number -1;
 			
-			ArrayList<Integer> curr_relat_positions = new ArrayList<Integer>(ChrArrayList.get(index).Position);
+			ArrayList<Long> curr_relat_positions = new ArrayList<Long>(ChrArrayList.get(index).Position);
 			
 			//get absolute position of each read:
 			long read_position = Integer.parseInt(split[1]);
@@ -180,21 +180,23 @@ public class Relative_Distance_Eaton {
 	
 			
 			//write Chromatin number and absolute position into orc_output.csv data file;
+			/*****
 			output.write(chr_number +",");
 			output.write(read_position +",");
 			output.write(split[2] +",");
+			*/
 			
 			for(int i=0; i<curr_relat_positions.size(); i++){
 				
 				long relat_position = (read_position - curr_relat_positions.get(i));
 				
 			//	System.out.print(", " + relat_position);
-			//	if(relat_position>=-1000 && relat_position<=1000)
+				if(relat_position>=-1000 && relat_position<=1000)
 					output.write(relat_position +" ");
 				
 			}//end for i<curr_relat_positions.size()
 			
-			output.write("\n");
+		//	output.write("\n");
 			
 		//	System.out.println();
 			
@@ -240,7 +242,7 @@ public class Relative_Distance_Eaton {
 class Chromatin{
 	
 	String name;
-	ArrayList<Integer> Position = new ArrayList<Integer>();
+	ArrayList<Long> Position = new ArrayList<Long>();
 	
 }//end of Chromatin class;
 
