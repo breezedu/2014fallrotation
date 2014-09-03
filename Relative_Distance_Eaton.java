@@ -235,6 +235,13 @@ public class Relative_Distance_Eaton {
 
 /********
  * Create Chromatin object for Relative Distance Eaton class;
+ * Each Cromatin object will hole a name String and one ArrayList;
+ * The arrayList will store all absolute distance readed from eaton_acs_filter_rDNA_match_oridb_acs_238_sites.csv
+ * 
+ * In later work (program section, we will use the readed positions from orc_chip_seq_dm265_data.csv minus
+ * each of the absolute distance in the arrayList;
+ * 
+ * ** Before doing the relative_distance calculation, check if the Chromatin.name matches the chromatin readed.
  * 
  * @author Jeff
  *
