@@ -49,7 +49,7 @@ public class Relative_Distance_Eaton {
 		
 		
 		String title = CSV_reader.nextLine();
-		System.out.println("Title: " + title);
+		System.out.println("CSV titles: " + title);
 		
 		
 		//2nd, create a current_Chromatin object, to compare each chromatin to be read;
@@ -106,15 +106,24 @@ public class Relative_Distance_Eaton {
 			
 		}//end while loop;
 		
+		//CSV_reader.close();
+		
 		int index = ChrArrayList.size();
 		System.out.println("There are " + index + " chromatins.");
 		
 		for(int i=0; i<index; i++){
-			System.out.println(" " + ChrArrayList.get(i).name +", " +ChrArrayList.get(i).Position.size() +". ");
+			int postions = ChrArrayList.get(i).Position.size();
+			System.out.print(" " + ChrArrayList.get(i).name +", " + postions +": ");
+			
+			for(int j=0; j<postions; j++){
+				System.out.print(" " + ChrArrayList.get(i).Position.get(j)+" ");
+			}
+			
+			System.out.println();
 		}
 		
 		/**************
-		 * At this point, each chromatin and it's absolute positions has been added to ChrArrayList list.
+		 * At this point, each chromatin and it's absolute position has been added to ChrArrayList list.
 		 * next, we will compare each of the chromatin's absolute positions to the reads in file: 
 		 * orc_chip_seq_dm265_data.csv
 		 * 
@@ -124,49 +133,81 @@ public class Relative_Distance_Eaton {
 		
 		
 		
-		//2nd, create a file to write all outputs:
-		File output_file = new File("output.csv");
+		//7th, create a file to write all outputs:
+		File output_file = new File("orc_output_big.csv");
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));
 		
 		//write the titles for each column;
-		output.write("name,chr,pos,strand,rela_pos,score" +"\n");
+		output.write("name,chr,pos,strand,rela_positions" +"\n");
 		
-		while(CSV_reader.hasNextLine()){
+		
+		//8th, create another reader to read_in data from orc_chip_seq_dm265_data.csv;
+		Scanner ORC_reader = new Scanner (new File("orc_chip_seq_dm265_data.csv"));
+		
+		//read_in the first line, titles of each column;
+		String orc_title = ORC_reader.nextLine();
+		System.out.println("ORC titles: " + orc_title);
+		
+		
+		while(ORC_reader.hasNextLine()){
 			
-			String line = CSV_reader.nextLine();
+			String line = ORC_reader.nextLine();
 			String[] split = line.split(",");
 			
 			//split every element in the line between ',' then print out the array; 
 			//printArray(split);
 			
 			//from absolute distance and strand#, calculate relative distance;
-			int chr_number = Integer.parseInt(split[1]);
-			int absolute_position = Integer.parseInt(split[2]);
+			int chr_number = Integer.parseInt(split[0]);
 			
-			int relative_distance = 0;
-			if(split[3].equals("-")) relative_distance = (absolute_position - chr_number)*(-1);
-			else relative_distance = absolute_position - chr_number;
+			/************
+			 * Just found that there are Chromatin_17 reads in the orc_chip_seq_dm256_data.csv file;
+			 * So, here I choose to close the output writer, then nothing will be written into
+			 * the output.csv file;
+			 */
+			if(chr_number > 16 ) output.close();
 			
-			double score = Double.parseDouble(split[4]);
+			//get the chromation object from ChrArrayList, according to chr_number; 
+			index = chr_number -1;
+			
+			ArrayList<Integer> curr_relat_positions = new ArrayList<Integer>(ChrArrayList.get(index).Position);
+			
+			//get absolute position of each read:
+			long read_position = Integer.parseInt(split[1]);
 			
 			
-			System.out.println("  " + split[0] + "  " + chr_number +"  " + absolute_position +"  " +
-								split[3] + "  " + relative_distance +"  " + score +". ");
+			//System.out.print( chr_number +"  " + read_position +"  " + split[2] + " ");
+	
 			
+			//write Chromatin number and absolute position into orc_output.csv data file;
+			output.write(chr_number +",");
+			output.write(read_position +",");
+			output.write(split[2] +",");
+			
+			for(int i=0; i<curr_relat_positions.size(); i++){
+				
+				long relat_position = (read_position - curr_relat_positions.get(i));
+				
+			//	System.out.print(", " + relat_position);
+			//	if(relat_position>=-1000 && relat_position<=1000)
+					output.write(relat_position +" ");
+				
+			}//end for i<curr_relat_positions.size()
+			
+			output.write("\n");
+			
+		//	System.out.println();
 			
 			//write name, chri, relative distance to output.csv;
-			output.write(split[0] + ", ");
-			output.write(chr_number +", ");
-			output.write(absolute_position +", ");
-			output.write(split[3] +", ");
-			output.write(relative_distance +", " + score + "\n");
+						
 			
 		}//end while(CSV_reader has next line loop;
 		
 			
-		//close both output and reader;
+		//close output and readers;
 		output.close();
 		CSV_reader.close();
+		ORC_reader.close();
 		
 		
 	}//end of main();
