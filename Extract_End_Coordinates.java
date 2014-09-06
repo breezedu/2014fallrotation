@@ -10,7 +10,7 @@ import java.util.Scanner;
  * try to create the output file that extracts the end coordinates of the reads 
  * from the alignment file, alignment file: my_bowtie_output.txt
  * 
- * output file: DM454_bowtie_output_coordinates.csv or txt they are the same;
+ * output file: DM454_bowtie_output_coordinates.csv or txt they are the same; 
  * 
  * @author Jeff
  *
