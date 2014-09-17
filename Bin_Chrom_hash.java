@@ -48,16 +48,19 @@ public class Bin_Chrom_hash {
 		
 		firstLine = bedReader.nextLine();
 		
-		//3rd, read_in data line by line:
+		//3rd, read_in data line by line: split the line with "\t", then we could get 3 strings;
+		//the 1st split[] is chr2L, follow with start and end reads;
+		//here we just use the start read as the bin parameter; 
 		while(bedReader.hasNextLine()){
 			
 			String line = bedReader.nextLine();
 			String[] split = line.split("\t");
 			
 			
-			//String chr_name = split[0];
+			//just use the start read as the bin_parameter;
 			long start = Long.parseLong(split[1]);
 			
+			//String chr_name = split[0];
 			//long end = Long.parseLong(split[2]);			
 			//System.out.println("name:" + chr_name +", start:" +start +", end:" + end +".");
 			
@@ -79,9 +82,13 @@ public class Bin_Chrom_hash {
 			
 		}//end while loop;
 		
+		/******************
+		 * traverse from (1,1000) till (max_bin*1000, max_bin*1000-1);
+		 * check the binHash map, get total bin reads for each range:
+		 * 		
+		 */
 		for(long i = 1; i<=max_bin; i++){
 			
-
 			long end = i*1000;
 			long start = end-999;
 			System.out.println("chr2L " + start +", " + end + ", " + binHash.get(i) + "; \n");
