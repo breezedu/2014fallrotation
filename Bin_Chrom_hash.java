@@ -64,7 +64,7 @@ public class Bin_Chrom_hash {
 			//long end = Long.parseLong(split[2]);			
 			//System.out.println("name:" + chr_name +", start:" +start +", end:" + end +".");
 			
-			long position = start%1000;
+			long position = start/1000;
 			
 			//update max_bin;
 			if(position > max_bin) max_bin = position;
