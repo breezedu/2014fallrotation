@@ -32,7 +32,7 @@ public class Build_BED_file_from_Bowtie_output {
 		String Fstline = BowtieReader.nextLine();
 		System.out.println("1: " + Fstline);
 		
-		File output_file = new File("D:/2014FallRotation/data/BED_DM433_2L_output_t.txt");
+		File output_file = new File("D:/2014FallRotation/data/BED_DM433_2L_output_t_916.txt");
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));
 		
 		//track name="Kc-Early" description="Kc-Early" visibility=1 color=0,100,0
@@ -48,7 +48,7 @@ public class Build_BED_file_from_Bowtie_output {
 		//	System.out.println(" " + currChromosome.Chromo_name +" ;");
 		//Check if the Chromosome's name is equal to "2L", if yes, save related info into output file;	
 			if(currChromosome.Chromo_name.equals("2L")){
-				output.write("chr21" +"\t" + currChromosome.Position +"\t" + (currChromosome.Position+49) +"\n");
+				output.write("chr2L" +"\t" + currChromosome.Position +"\t" + (currChromosome.Position+49) +"\n");
 			}
 			
 		}//end of while() loop;
