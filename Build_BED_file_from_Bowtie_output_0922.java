@@ -84,19 +84,22 @@ public class Build_BED_file_from_Bowtie_output_0922 {
 		line = splitLine[1]; 	//this will elimite the first name string;
 		
 		String[] infoLine = line.split("\t");
-	//	System.out.println("Strand: " + infoLine[1] +",  Chromosome: " + infoLine[2] + ",  Position: " + infoLine[3] +". ");
+		//use a println line to check if the infoLine was split correctly;
+		//System.out.println("Strand: " + infoLine[1] +",  Chromosome: " + infoLine[2] + ",  Position: " + infoLine[3] +". ");
 		
-		String Chromosome = infoLine[2];
+		
+		String chroName = infoLine[2];
 		long Position = Long.parseLong(infoLine[3]);
 		
 		
+		//according to the strand position (+/-), calculate the chromatin position:
 		if(infoLine[1].equals("+")) Position += 1;
 		else Position = Position -50 +1;
 		
 		//Create a Chromosome object, when return the Chromosome object, the chromosome and the position
 		//could be returned at the same time.
 		Chromosome currChro = new Chromosome();
-		currChro.Chromo_name = Chromosome;
+		currChro.Chromo_name = chroName;
 		currChro.Position = Position;
 		
 		return currChro;
