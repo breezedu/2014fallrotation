@@ -83,13 +83,12 @@ public class Build_BED_file_from_Bowtie_output_0922 {
 		
 		line = splitLine[1]; 	//this will elimite the first name string;
 		
-		String[] infoLine = line.split("\t");
-		//use a println line to check if the infoLine was split correctly;
-		//System.out.println("Strand: " + infoLine[1] +",  Chromosome: " + infoLine[2] + ",  Position: " + infoLine[3] +". ");
+		String[] infoLine = line.split("\t"); //split the second part of the original line;
 		
 		
 		String chroName = infoLine[2];
 		long Position = Long.parseLong(infoLine[3]);
+		//int seqLength = infoLine[5].length();
 		
 		
 		//according to the strand position (+/-), calculate the chromatin position:
@@ -101,6 +100,11 @@ public class Build_BED_file_from_Bowtie_output_0922 {
 		Chromosome currChro = new Chromosome();
 		currChro.Chromo_name = chroName;
 		currChro.Position = Position;
+		
+		
+		//use a println line to check if the infoLine was split correctly;
+		System.out.println("Strand: " + infoLine[1] +",  Chromosome: " + infoLine[2] + ",  Position: " + infoLine[3] +" -" + infoLine[4] + ". ");
+				
 		
 		return currChro;
 	}//end of CalCoordinate() method;
