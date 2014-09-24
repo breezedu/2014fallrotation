@@ -1,7 +1,9 @@
 package rotation2014fall;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,10 +29,12 @@ import java.util.Scanner;
 
 public class Chromatin_signal_over_earlyandlate_regions {
 
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) throws IOException{
 		
 		System.out.println("This is Chromatin_single_over_earlyandlate_regions class.");
 		
+
+		/********************************************************************************************/
 		//1st, in this stage, we just check Chr2L one chromatin; 
 		//read_in datas from Kc-EarlyDomains.bed and Kc-LateDomains.bed files;
 		//every line in these documents is a ChrRegion object, put them into two ArrayList<> lists;
@@ -91,7 +95,8 @@ public class Chromatin_signal_over_earlyandlate_regions {
 		System.out.println("There are " + late_size + " chromation regions in late phase.\n");
 		
 		
-		
+
+		/********************************************************************************************/
 		//2nd, read_in chromatin2L reads from BED_DM433_2L_output_t_922.txt document;
 		//compare the read_in read with Chr2L_early and Chr2L_late data in two ArrayLists; 
 		//if we get a match (like Chr2L_early.at(3), update Chr2L_early.at(3).read++;
@@ -129,7 +134,11 @@ public class Chromatin_signal_over_earlyandlate_regions {
 			
 		}//end while(Chr2L_reads.hasNextLine()) loop;
 		
-		System.out.println("Printout the chr2L early regions:");
+		
+
+		/********************************************************************************************/
+		//3rd, printout the updated Chr_early and Chr_late arrayLists:
+		System.out.println("Printout the chrAll early regions:");
 		for(int i=0; i<early_size; i++){
 			
 			ChrRegion currCR = Chr_early.get(i);
@@ -148,12 +157,49 @@ public class Chromatin_signal_over_earlyandlate_regions {
 		}
 		
 		
+		/********************************************************************************************/
+		//4th, write the Chr_early and Chr_late arrayLists data into two txt documents;
+		
+		//early phase
+		File output_Chr_early = new File("D:/2014FallRotation/data/allChrs_early_output_924.txt");
+		BufferedWriter output_early = new BufferedWriter(new FileWriter(output_Chr_early));
+		
+		//chr_name  start  end  read
+		output_early.write("chr_name" + "\t" + "start_pos" + "\t" + "end_pos" +"\t" + "read_count" +"\n");
+		
+		for(int i=0; i<early_size; i++){
+			
+			ChrRegion currChr = Chr_early.get(i);
+			output_early.write(currChr.name + "\t" + currChr.start + "\t" + currChr.end +"\t" + currChr.read +"\n");
+		
+		}
+		
+		//late_phase
+		File output_Chr_late = new File("D:/2014FallRotation/data/allChrs_late_output_924.txt");
+		BufferedWriter output_late = new BufferedWriter(new FileWriter(output_Chr_late));
+		
+		//chr_name  start  end  read
+		output_late.write("chr_name" + "\t" + "start_pos" + "\t" + "end_pos" +"\t" + "read_count" +"\n");
+		
+		for(int i=0; i<late_size; i++){
+			
+			ChrRegion currChr = Chr_late.get(i);
+			output_late.write(currChr.name + "\t" + currChr.start + "\t" + currChr.end +"\t" + currChr.read +"\n");
+		
+		}		
 		
 		
-		//close() Scanners
+		
+
+		/********************************************************************************************/
+		//5th, close() Scanners
 		read_Chr_early.close();
 		read_Chr_late.close();
 		Chr_reads.close();
+		
+		//close() output_writters
+		output_early.close();
+		output_late.close();
 		
 	}//end of main()
 	
