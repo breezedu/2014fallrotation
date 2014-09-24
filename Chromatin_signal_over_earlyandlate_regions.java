@@ -95,7 +95,7 @@ public class Chromatin_signal_over_earlyandlate_regions {
 		//2nd, read_in chromatin2L reads from BED_DM433_2L_output_t_922.txt document;
 		//compare the read_in read with Chr2L_early and Chr2L_late data in two ArrayLists; 
 		//if we get a match (like Chr2L_early.at(3), update Chr2L_early.at(3).read++;
-		Scanner Chr_reads = new Scanner(new File("D:/2014FallRotation/data/BED_DM433_2L_output_t_922.txt"));
+		Scanner Chr_reads = new Scanner(new File("D:/2014FallRotation/data/BED_DM433_allChrs_output_924.txt"));
 		firstLine = Chr_reads.nextLine();
 		System.out.println("The first line of BED_DM433_2L_output_t_922.txt is: " + firstLine);
 		
@@ -139,13 +139,16 @@ public class Chromatin_signal_over_earlyandlate_regions {
 		
 		System.out.println();
 		
-		System.out.println("Printout the chr2L late regions:");
+		System.out.println("Printout the chrALL late regions:");
 		for(int i=0; i<late_size; i++){
 			
 			ChrRegion currCR = Chr_late.get(i);
 			//if(currCR.name.equals("chr2L"))
 			System.out.println(currCR.name + ", " + currCR.start +", " + currCR.end +", " + currCR.read +". ");
 		}
+		
+		
+		
 		
 		//close() Scanners
 		read_Chr_early.close();
