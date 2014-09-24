@@ -34,21 +34,21 @@ public class Chromatin_signal_over_earlyandlate_regions {
 		//1st, in this stage, we just check Chr2L one chromatin; 
 		//read_in datas from Kc-EarlyDomains.bed and Kc-LateDomains.bed files;
 		//every line in these documents is a ChrRegion object, put them into two ArrayList<> lists;
-		ArrayList<ChrRegion> Chr2L_early = new ArrayList<ChrRegion>();
-		ArrayList<ChrRegion> Chr2L_late = new ArrayList<ChrRegion>();
+		ArrayList<ChrRegion> Chr_early = new ArrayList<ChrRegion>();
+		ArrayList<ChrRegion> Chr_late = new ArrayList<ChrRegion>();
 		
-		Scanner read_Chr2L_early = new Scanner(new File("D:/2014FallRotation/data/Kc-EarlyDomains.bed"));
-		Scanner read_Chr2L_late = new Scanner(new File("D:/2014FallRotation/data/Kc-LateDomains.bed"));
+		Scanner read_Chr_early = new Scanner(new File("D:/2014FallRotation/data/Kc-EarlyDomains.bed"));
+		Scanner read_Chr_late = new Scanner(new File("D:/2014FallRotation/data/Kc-LateDomains.bed"));
 		
-		String firstLine = read_Chr2L_early.nextLine();
+		String firstLine = read_Chr_early.nextLine();
 		System.out.println("First line of Chr2L_early: " + firstLine);
 		
 		//read_in data from Kc-EarlyDomains.bed and build Chr2L_early arrayList;
-		while(read_Chr2L_early.hasNextLine()){
+		while(read_Chr_early.hasNextLine()){
 			
-			String name = read_Chr2L_early.next();
-			long start = read_Chr2L_early.nextLong();
-			long end = read_Chr2L_early.nextLong();
+			String name = read_Chr_early.next();
+			long start = read_Chr_early.nextLong();
+			long end = read_Chr_early.nextLong();
 			
 			//build a new ChrRegion object;
 			ChrRegion currChrRegion = new ChrRegion();
@@ -56,20 +56,20 @@ public class Chromatin_signal_over_earlyandlate_regions {
 			currChrRegion.start = start;
 			currChrRegion.end = end;
 			
-			Chr2L_early.add(currChrRegion);
+			Chr_early.add(currChrRegion);
 			
 		}//end while(read_Chr2L_early.hasNextLine()) loop;
 		
-		int early_size = Chr2L_early.size();
+		int early_size = Chr_early.size();
 		System.out.println("There are " + early_size + " chromation regions in early phase.\n");
 		
 		
 		//read_in data from Kc-LateDomains.bed and build Chr2L_early arrayList;
-		firstLine = read_Chr2L_late.nextLine();
+		firstLine = read_Chr_late.nextLine();
 		System.out.println("First line of Chr2L_late: " + firstLine);
 		
-		while(read_Chr2L_late.hasNextLine()){
-			String line = read_Chr2L_late.nextLine();
+		while(read_Chr_late.hasNextLine()){
+			String line = read_Chr_late.nextLine();
 			String[] splitLine = line.split("\t");
 			
 			String name = splitLine[0];
@@ -82,12 +82,12 @@ public class Chromatin_signal_over_earlyandlate_regions {
 			currChrRegion.start = start;
 			currChrRegion.end = end;
 				
-			Chr2L_late.add(currChrRegion);
+			Chr_late.add(currChrRegion);
 					
 		}//end while(read_Chr2L_early.hasNextLine()) loop;
 		
 		//at this point, all Chr2L_early and Chr2L_late chromatin informations have been added to arrayLists;
-		int late_size = Chr2L_late.size();
+		int late_size = Chr_late.size();
 		System.out.println("There are " + late_size + " chromation regions in late phase.\n");
 		
 		
@@ -95,14 +95,14 @@ public class Chromatin_signal_over_earlyandlate_regions {
 		//2nd, read_in chromatin2L reads from BED_DM433_2L_output_t_922.txt document;
 		//compare the read_in read with Chr2L_early and Chr2L_late data in two ArrayLists; 
 		//if we get a match (like Chr2L_early.at(3), update Chr2L_early.at(3).read++;
-		Scanner Chr2L_reads = new Scanner(new File("D:/2014FallRotation/data/BED_DM433_2L_output_t_922.txt"));
-		firstLine = Chr2L_reads.nextLine();
+		Scanner Chr_reads = new Scanner(new File("D:/2014FallRotation/data/BED_DM433_2L_output_t_922.txt"));
+		firstLine = Chr_reads.nextLine();
 		System.out.println("The first line of BED_DM433_2L_output_t_922.txt is: " + firstLine);
 		
 		
-		while(Chr2L_reads.hasNextLine()){
+		while(Chr_reads.hasNextLine()){
 			
-			String currLine = Chr2L_reads.nextLine();
+			String currLine = Chr_reads.nextLine();
 			String[] splitLine = currLine.split("\t");
 			String name = splitLine[0];
 			
@@ -110,9 +110,9 @@ public class Chromatin_signal_over_earlyandlate_regions {
 			
 			for(int i=0; i<early_size; i++){
 				
-				if(name.equals(Chr2L_early.get(i).name) && start >= Chr2L_early.get(i).start && start <= Chr2L_early.get(i).end){
+				if(name.equals(Chr_early.get(i).name) && start >= Chr_early.get(i).start && start <= Chr_early.get(i).end){
 					
-					Chr2L_early.get(i).read++;
+					Chr_early.get(i).read++;
 					i = early_size;
 				}
 			}//end for i<early_size loop;
@@ -120,9 +120,9 @@ public class Chromatin_signal_over_earlyandlate_regions {
 			
 			for(int j=0; j<late_size; j++){
 				
-				if(name.equals(Chr2L_late.get(j).name) && start >= Chr2L_late.get(j).start && start <= Chr2L_late.get(j).end){
+				if(name.equals(Chr_late.get(j).name) && start >= Chr_late.get(j).start && start <= Chr_late.get(j).end){
 					
-					Chr2L_late.get(j).read++;
+					Chr_late.get(j).read++;
 					j = late_size;
 				}
 			}
@@ -132,9 +132,9 @@ public class Chromatin_signal_over_earlyandlate_regions {
 		System.out.println("Printout the chr2L early regions:");
 		for(int i=0; i<early_size; i++){
 			
-			ChrRegion currCR = Chr2L_early.get(i);
-			if(currCR.name.equals("chr2L"))
-				System.out.println(currCR.name + ", " + currCR.start +", " + currCR.end +", " + currCR.read +". ");
+			ChrRegion currCR = Chr_early.get(i);
+			//if(currCR.name.equals("chr2L"))
+			System.out.println(currCR.name + ", " + currCR.start +", " + currCR.end +", " + currCR.read +". ");
 		}
 		
 		System.out.println();
@@ -142,15 +142,15 @@ public class Chromatin_signal_over_earlyandlate_regions {
 		System.out.println("Printout the chr2L late regions:");
 		for(int i=0; i<late_size; i++){
 			
-			ChrRegion currCR = Chr2L_late.get(i);
+			ChrRegion currCR = Chr_late.get(i);
 			//if(currCR.name.equals("chr2L"))
-				System.out.println(currCR.name + ", " + currCR.start +", " + currCR.end +", " + currCR.read +". ");
+			System.out.println(currCR.name + ", " + currCR.start +", " + currCR.end +", " + currCR.read +". ");
 		}
 		
 		//close() Scanners
-		read_Chr2L_early.close();
-		read_Chr2L_late.close();
-		Chr2L_reads.close();
+		read_Chr_early.close();
+		read_Chr_late.close();
+		Chr_reads.close();
 		
 	}//end of main()
 	
