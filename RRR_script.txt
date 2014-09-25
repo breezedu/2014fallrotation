@@ -1,0 +1,38 @@
+> early = read.table("D:/2014FallRotation/data/allChrs_early_output_924.txt", sep="\t", col.names=c("chr_id", "start_pos", "end_pos", "reads"))
+
+
+> late = read.table("D:/2014FallRotation/data/allChrs_late_output_924.txt", sep="\t", col.names=c("chr_id", "start_pos", "end_pos", "reads"))
+
+> head(early)
+  chr_id start_pos end_pos reads
+1  chr2L     59001  300000 34108
+2  chr2L    366001  630000 35529
+3  chr2L    810001  911000 11479
+4  chr2L   1347001 1484000  2720
+5  chr2L   1632001 1747000  5630
+6  chr2L   1946001 1999000  1704
+
+> head(late)
+  chr_id start_pos end_pos reads
+1  chr2L    627001  813000  5248
+2  chr2L   1005001 1048000  1178
+3  chr2L   1258001 1350000  2574
+4  chr2L   2406001 2648000  5065
+5  chr2L   3839001 4200000  4914
+6  chr2L   4268001 4326000   806
+
+
+> names(late)
+[1] "chr_id"    "start_pos" "end_pos"   "reads"    
+> late_2L = subset(late, late$chr_id=="chr2L")
+> late_2R = subset(late, late$chr_id=="chr2R")
+> late_3L = subset(late, late$chr_id=="chr3L")
+> late_3R = subset(late, late$chr_id=="chr3R")
+> late_X = subset(late, late$chr_id=="chrX")
+
+
+> boxplot(early$reads, late$reads, col=c("red", "blue"), names=c("Early", "Late"), xlab="chromatins", ylab="Read Regions")
+> 
+
+> boxplot(early_2L$reads, late_2L$reads, early_2R$reads, late_2R$reads, early_3L$reads, late_3L$reads, early_3R$reads, late_3R$reads, early_X$reads, late_X$reads, col=c("red", "green","red", "green","red", "green","red", "green","red", "green"), names=c("2L-early", "2L-late", "2R-early", "2R-late", "3L-early", "3L-late", "3R-early", "3R-late", "3X-early", "3X-late"), xlab="chromations", ylab="read regions")
+
