@@ -54,3 +54,20 @@ gd44@alchemy:~/DM433/index_prob$ pwd
 gd44@alchemy:~/DM433/index_prob$
 
 
+
+
+gd44@alchemy:~/yulong$ ls
+DM456_S1_L001_R1_001.fastq  DM460_S5_L001_R1_001.fastq  index_prob
+DM457_S2_L001_R1_001.fastq  DM461_S6_L001_R1_001.fastq  Undetermined_S0_L001_R1_001.fastq
+DM458_S3_L001_R1_001.fastq  DM462_S7_L001_R1_001.fastq
+DM459_S4_L001_R1_001.fastq  DM463_S8_L001_R1_001.fastq
+
+
+gd44@alchemy:~/yulong$ pwd
+/home/gd44/yulong
+
+
+gd44@alchemy:~/yulong$ bowtie -p 8 -n 2 -l 20 -m 1 --tryhard --chunkmbs 256 /data/illumina_pipeline/genomes/fly/dmel_M_noUextra/dmel_M_noUextra DM456_S1_L001_R1_001.fastq,DM457_S2_L001_R1_001.fastq,DM458_S3_L001_R1_001.fastq,DM459_S4_L001_R1_001.fastq,DM460_S5_L001_R1_001.fastq,DM461_S6_L001_R1_001.fastq,DM462_S7_L001_R1_001.fastq,DM463_S8_L001_R1_001.fastq output_926.txt
+
+
+
