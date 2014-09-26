@@ -1,0 +1,56 @@
+Command: bowtie-build -r DM433_GGCTAC_L001_R1_001.fastq,DM433_GGCTAC_L001_R1_002.fastq,DM433_GGCTAC_L001_R1_003.fastq,DM433_GGCTAC_L001_R1_004.fastq /home/gd44/DM433/index_prob/prob
+
+
+gd44@alchemy:~/DM433$ ls
+allChrs_early_output_924.txt    DM433_GGCTAC_L001_R1_004.fastq  DM433_GGCTAC_L001_R1_009.fastq  output925.txt
+allChrs_late_output_924.txt     DM433_GGCTAC_L001_R1_005.fastq  index_prob                      SampleSheet.csv
+DM433_GGCTAC_L001_R1_001.fastq  DM433_GGCTAC_L001_R1_006.fastq  Kc-EarlyDomains.bed
+DM433_GGCTAC_L001_R1_002.fastq  DM433_GGCTAC_L001_R1_007.fastq  Kc-LateDomains.bed
+DM433_GGCTAC_L001_R1_003.fastq  DM433_GGCTAC_L001_R1_008.fastq  output
+
+
+gd44@alchemy:~/DM433$ cd index_prob/
+
+gd44@alchemy:~/DM433/index_prob$ ls
+index.1.ebwt  index.2.ebwt  prob.1.ebwt  prob.2.ebwt
+
+gd44@alchemy:~/DM433/index_prob$ cd ..
+
+
+gd44@alchemy:~/DM433$ bowtie-build -3 DM433_GGCTAC_L001_R1_001.fastq,DM433_GGCTAC_L001_R1_002.fastq,DM433_GGCTAC_L001_R1_003.fastq,DM433_GGCTAC_L001_R1_004.fastq /home/gd44/DM433/index_prob/prob
+
+Settings:
+  Output files: "/home/gd44/DM433/index_prob/prob.*.ebwt"
+  Line rate: 6 (line is 64 bytes)
+  Lines per side: 1 (side is 64 bytes)
+  Offset rate: 5 (one in 32)
+  FTable chars: 10
+  Strings: unpacked
+  Max bucket size: default
+  Max bucket size, sqrt multiplier: default
+  Max bucket size, len divisor: 4
+  Difference-cover sample period: 1024
+  Endianness: little
+  Actual local endianness: little
+  Sanity checking: disabled
+  Assertions: disabled
+  Random seed: 0
+  Sizeofs: void*:8, int:4, long:8, size_t:8
+Input files DNA, FASTA:
+  DM433_GGCTAC_L001_R1_001.fastq
+  DM433_GGCTAC_L001_R1_002.fastq
+  DM433_GGCTAC_L001_R1_003.fastq
+  DM433_GGCTAC_L001_R1_004.fastq
+Reading reference sizes
+  Time reading reference sizes: 00:00:14
+Total time for call to driver() for forward index: 00:00:14
+
+
+gd44@alchemy:~/DM433/index_prob$ ls
+index.1.ebwt  index.2.ebwt  prob.1.ebwt  prob.2.ebwt  prob.3.ebwt  prob.4.ebwt
+
+gd44@alchemy:~/DM433/index_prob$ pwd
+/home/gd44/DM433/index_prob
+gd44@alchemy:~/DM433/index_prob$
+
+

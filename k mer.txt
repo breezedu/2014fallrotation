@@ -1,0 +1,64 @@
+k = 21
+
+Final graph has 10537 nodes and n50 of 115, max 1232, total 872246, using 26563/50000 reads
+
+
+k = 22
+Final graph has 10537 nodes and n50 of 115, max 1232, total 872246, using 26563/50000 reads
+
+k = 23
+
+Final graph has 9197 nodes and n50 of 115, max 1291, total 826986, using 25811/50000 reads
+
+
+k = 24
+
+Final graph has 9197 nodes and n50 of 115, max 1291, total 826986, using 25811/50000 reads
+
+
+k = 25
+
+Final graph has 8255 nodes and n50 of 115, max 1669, total 786152, using 25107/50000 reads
+
+
+k = 26
+
+Final graph has 8255 nodes and n50 of 115, max 1669, total 786152, using 25107/50000 reads
+
+
+k = 27
+
+Final graph has 7524 nodes and n50 of 114, max 2140, total 741388, using 24312/50000 reads
+
+
+k = 28
+
+Final graph has 7524 nodes and n50 of 114, max 2140, total 741388, using 24312/50000 reads
+
+
+k = 29
+
+Final graph has 6996 nodes and n50 of 112, max 2083, total 696794, using 23508/50000 reads
+
+
+k = 30
+
+Final graph has 6996 nodes and n50 of 112, max 2083, total 696794, using 23508/50000 reads
+
+
+k = 31
+
+Final graph has 6506 nodes and n50 of 111, max 1725, total 652919, using 22692/50000 reads
+
+
+k = 32
+
+Final graph has 6506 nodes and n50 of 111, max 1725, total 652919, using 22692/50000 reads
+
+
+k = 33
+
+Final graph has 6506 nodes and n50 of 111, max 1725, total 652919, using 22692/50000 reads
+
+
+
