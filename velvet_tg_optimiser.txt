@@ -1,11 +1,13 @@
 Velvet: 
 https://www.ebi.ac.uk/~zerbino/velvet/
 Use [sudo apt-get velvet]
+???the question is, how to make 'MAXKMERLENGTH=99', after sudo installed velvet, ==!
 
 
 VelvetOptimiser:
 http://www.vicbioinformatics.com/VelvetOptimiser-2.2.5.tar.gz
 I unziped the VelvetOptimiser into /home/gd44/CBB520/VelvetOptimiser-2.2.5 directory;
+
 
 
 
@@ -26,13 +28,18 @@ repeat step 3 and step 4 for all K-mers between 17 and 31;
 
 
 AFTER step 5, we could see the VelvetOptimiser output, which will give the optimisized parameters for velveth and velvetg.
+                        -exp_cov = XX, -cov_cutoff = YY
 
 
 6th, run velvetg again, with the parameters just got: 
 
-velvetg auto_data_21/ -amos_file yes -exp_cov XX -cov_cutoff YY
+                       velvetg auto_data_21/ -amos_file yes -exp_cov XX -cov_cutoff YY
+
 
 7th, check the contig.fa and the stat.txt documents.
 
+
+
 8th, transfer the outputed AMOS file into genomic-browser readable format;
+
  
