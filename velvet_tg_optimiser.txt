@@ -12,28 +12,39 @@ I unziped the VelvetOptimiser into /home/gd44/CBB520/VelvetOptimiser-2.2.5 direc
 
 
 1st, download fastq or fasta raw data files into Ubuntu directory: /home/gd44/CBB520/data
-------------Here I just use [wget http://] commander.
+------------Here I just use [wget http://url.duke.edu] commander.
 
-2nd, run velveth, velvetg, and /home/gd44/CBB520/VelvetOptimiser-2.2.5/VelvetOptimiser.pl
+2nd, run velveth, velvetg, and VelvetOptimiser.pl
+            [velveth ] , [velvetg], [/home/gd44/CBB520/VelvetOptimiser-2.2.5/VelvetOptimiser.pl ]
+            to check if each module works well.
 
-3rd, run velveth auto_data_17/ 17 -shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+3rd, run velveth 
+            [ velveth auto_data_17/ 17 -shortPaired -fastq yjm993million.fastq yjm993million2.fastq ]
 
-4th, run velvetg auto_data_17/ -cov_cutoff auto -exp_cov auto
+4th, run velvetg 
+            [velvetg auto_data_17/ -cov_cutoff auto -exp_cov auto ]
 
-=======
-repeat step 3 and step 4 for all K-mers between 17 and 31;
-=======
+===========================================================================================
+	repeat step 3 and step 4 for all K-mers between 17 and 31;
+	but, change the output directories correspondingly;
+	auto_data_17, auto_data_19, auto_data_21 ------------auto_data_29, auto_data_31
+===========================================================================================
 
-5th, run /home/gd44/CBB520/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 17 -e 31 -f '-shortPaired -fastq yjm993million.fastq yjm993million2.fastq'
+
+5th, run VelvetOptimiser.pl
+	[/home/gd44/CBB520/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 17 -e 31 -f '-shortPaired -fastq yjm993million.fastq yjm993million2.fastq'  ]
+
 
 
 AFTER step 5, we could see the VelvetOptimiser output, which will give the optimisized parameters for velveth and velvetg.
-                        -exp_cov = XX, -cov_cutoff = YY
+	
+               here we suppose the best Kmer is 21, best -exp_cov = 4, -cov_cutoff = 3.94
 
 
 6th, run velvetg again, with the parameters just got: 
-
-                       velvetg auto_data_21/ -amos_file yes -exp_cov XX -cov_cutoff YY
+	[ velvetg auto_data_21/ -cov_cutoff 3.94, -exp_cov 4 ]
+	 or
+	[velvetg auto_data_21/ -amos_file yes -exp_cov 3.94 -cov_cutoff 4
 
 
 7th, check the contig.fa and the stat.txt documents.
