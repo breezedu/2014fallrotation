@@ -1,0 +1,38 @@
+Velvet: 
+https://www.ebi.ac.uk/~zerbino/velvet/
+Use [sudo apt-get velvet]
+
+
+VelvetOptimiser:
+http://www.vicbioinformatics.com/VelvetOptimiser-2.2.5.tar.gz
+I unziped the VelvetOptimiser into /home/gd44/CBB520/VelvetOptimiser-2.2.5 directory;
+
+
+
+1st, download fastq or fasta raw data files into Ubuntu directory: /home/gd44/CBB520/data
+------------Here I just use [wget http://] commander.
+
+2nd, run velveth, velvetg, and /home/gd44/CBB520/VelvetOptimiser-2.2.5/VelvetOptimiser.pl
+
+3rd, run velveth auto_data_17/ 17 -shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+
+4th, run velvetg auto_data_17/ -cov_cutoff auto -exp_cov auto
+
+=======
+repeat step 3 and step 4 for all K-mers between 17 and 31;
+=======
+
+5th, run /home/gd44/CBB520/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 17 -e 31 -f '-shortPaired -fastq yjm993million.fastq yjm993million2.fastq'
+
+
+AFTER step 5, we could see the VelvetOptimiser output, which will give the optimisized parameters for velveth and velvetg.
+
+
+6th, run velvetg again, with the parameters just got: 
+
+velvetg auto_data_21/ -amos_file yes -exp_cov XX -cov_cutoff YY
+
+7th, check the contig.fa and the stat.txt documents.
+
+8th, transfer the outputed AMOS file into genomic-browser readable format;
+ 
