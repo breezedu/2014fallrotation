@@ -1,7 +1,15 @@
 Velvet: 
 https://www.ebi.ac.uk/~zerbino/velvet/
 Use [sudo apt-get velvet]
+
+
 ???the question is, how to make 'MAXKMERLENGTH=99', after sudo installed velvet, ==!
+
+	I used vi editor to edit the Makefile in velvet_1.2.10 folder
+           [vi Makefile ]
+ 	then follow the instruction in this page: http://www.cs.rit.edu/~cslab/vi.html
+        I updated both MAXKMERLENGTH=99 AND CATEGORIES=99;
+
 
 
 VelvetOptimiser:
