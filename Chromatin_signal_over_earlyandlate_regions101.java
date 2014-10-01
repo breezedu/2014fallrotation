@@ -31,13 +31,16 @@ public class Chromatin_signal_over_earlyandlate_regions101 {
 
 	public static void main(String[] args) throws IOException{
 		
-		System.out.println("This is Chromatin_single_over_earlyandlate_regions class.");
+		System.out.println("This is Chromatin_single_over_earlyandlate_regions class. \n");
 		
 
 		/********************************************************************************************/
 		//1st, in this stage, we just check Chr2L one chromatin; 
 		//read_in datas from Kc-EarlyDomains.bed and Kc-LateDomains.bed files;
 		//every line in these documents is a ChrRegion object, put them into two ArrayList<> lists;
+		
+		System.out.println("Module 1: build Chr_early and Chr_late arrayLists and their sub_arrayLists.");
+		
 		ArrayList<ArrayList<ChrRegion>> Chr_early = new ArrayList<ArrayList<ChrRegion>>();
 		ArrayList<ArrayList<ChrRegion>> Chr_late = new ArrayList<ArrayList<ChrRegion>>();
 		
@@ -82,7 +85,7 @@ public class Chromatin_signal_over_earlyandlate_regions101 {
 		// HashMap<Long, Integer> phaseHash = buildPhaseHash(Chr_early, Chr_late);
 		
 		
-		
+		System.out.println("Use Binary_search_tree algorithm to check the region of each read.");
 		while(Chr_reads.hasNextLine()){
 			
 			String currLine = Chr_reads.nextLine();
@@ -343,8 +346,7 @@ public class Chromatin_signal_over_earlyandlate_regions101 {
 			for(int j=0; j<sub_size; j++){
 				ChrRegion currCR = chr_array.get(i).get(j);
 				//if(currCR.name.equals("chr2L"))
-				System.out.println("Line 337:  " + currCR.name + ", " + currCR.start +", " 
-									+ currCR.end +", " + currCR.read +". ");
+				System.out.println("Line 346:  " + currCR.name + ", " + currCR.start +", " + currCR.end +", " + currCR.read +". ");
 				
 			}//end inner for(j<sub_size) loop;
 
