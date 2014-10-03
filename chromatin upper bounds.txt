@@ -1,0 +1,35 @@
+gd44@alchemy:/data/illumina_pipeline/genomes/fly/dmel_M_noUextra$ bowtie-inspect -s dmel_M_noUextra
+
+
+
+Colorspace      0
+SA-Sample       1 in 32
+FTab-Chars      10
+
+Sequence-1      2L type=chromosome_arm; loc=2L:1..23011544; ID=2L; release=r5.1; species=Dmel;  23011544
+Sequence-2      2LHet type=chromosome_arm; loc=2LHet:1..368872; ID=2LHet; release=r5.1; species=Dmel;   368872
+
+Sequence-3      2R type=chromosome_arm; loc=2R:1..21146708; ID=2R; release=r5.1; species=Dmel;  21146708
+Sequence-4      2RHet type=chromosome_arm; loc=2RHet:1..3288761; ID=2RHet; release=r5.1; species=Dmel;  3288761
+
+Sequence-5      3L type=chromosome_arm; loc=3L:1..24543557; ID=3L; release=r5.1; species=Dmel;  24543557
+Sequence-6      3LHet type=chromosome_arm; loc=3LHet:1..2555491; ID=3LHet; release=r5.1; species=Dmel;  2555491
+
+Sequence-7      3R type=chromosome_arm; loc=3R:1..27905053; ID=3R; release=r5.1; species=Dmel;  27905053
+Sequence-8      3RHet type=chromosome_arm; loc=3RHet:1..2517507; ID=3RHet; release=r5.1; species=Dmel;  2517507
+
+Sequence-9      4 type=chromosome_arm; loc=4:1..1351857; ID=4; release=r5.1; species=Dmel;      1351857
+Sequence-10     U type=chromosome_arm; loc=U:1..10049037; ID=U; release=r5.1; species=Dmel;     10049037
+Sequence-11     X type=chromosome_arm; loc=X:1..22422827; ID=X; release=r5.1; species=Dmel;     22422827
+
+Sequence-12     XHet type=chromosome_arm; loc=XHet:1..204112; ID=XHet; release=r5.1; species=Dmel;      204112
+Sequence-13     YHet type=chromosome_arm; loc=YHet:1..347038; ID=YHet; release=r5.1; species=Dmel;      347038
+
+
+Sequence-14     M type=chromosome; loc=dmel_mitochondrion_genome:1..19517; ID=dmel_mitochondrion_genome; dbxref=GB:NC_001709; 
+
+
+MD5=61af8db53361cd5744f41f773d21c3d4; length=19517; release=r5.30; species=Dmel;      19517
+gd44@alchemy:/data/illumina_pipeline/genomes/fly/dmel_M_noUextra$
+
+
