@@ -49,7 +49,7 @@ public class Bowtie_output_to_BED_103 {
 		
 		
 		//input the chromatin name: chr2L, chr2R, chr3L, chr3R and chrX.
-		System.out.print("Please input the chromosome you want to extract: [2L, 2R, 3L, 3R or X \n chromosome = ");
+		System.out.print("Please input the chromosome you want to extract: [2L, 2R, 3L, 3R or X] \n chromosome = ");
 		
 		Scanner input = new Scanner(System.in);
 		String chromosome = input.next();
