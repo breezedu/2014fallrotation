@@ -37,7 +37,7 @@ public class Bowtie2BED_transfer_1003 {
 				
 		//1st, read-in data from Bowtie output file in the alchemy.duhs.duke.edu directory:
 		
-		System.out.println("Modele 1: Create scanner for Read-In data from a bowtie-output txt document.");
+		System.out.println("Modele 1: input Routine and file name for scanner.");
 		
 		
 		/***************************************************************************************************
@@ -71,14 +71,20 @@ public class Bowtie2BED_transfer_1003 {
 		
 		System.out.print("Please input the date of this operation: [1003] \n date = ");
 		String date = input.next();
+		System.out.println();
 		
+		/******************************************************************************************/
+		//2nd, read the first line of bowtie_output data line by line;
+		//create an output_writer for bowtie2BED document;
+		
+		System.out.println("Module 2: read-in bowtie_output and create bowtie2BED writer.");
 		
 		//scan read in bowtie_output file;
 		Scanner BowtieReader = new Scanner(new File(routine+ document +"_bowtie_output.txt"));
 		
 		
 		String Fstline = BowtieReader.nextLine();
-		System.out.println("1: " + Fstline);
+		System.out.println("First line of bowtie_output: " + Fstline);
 		
 		File output_file = new File(routine + document +"_bowtie2BED_" + chromosome +"_"+ date +".txt");
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));
@@ -86,11 +92,15 @@ public class Bowtie2BED_transfer_1003 {
 		//track name="Kc-Early" description="Kc-Early" visibility=1 color=0,100,0
 		output.write("track name= chr" +chromosome + " description=" + chromosome + " visibility=1 color=255,0,0" +"\n");
 		
-		System.out.println("Module 1 finish.\n");
+		System.out.println();
 		
-		//2nd, read the bowtie output data line by line;
 		
-		System.out.println("Module 2: read-in data line by line.");
+		/******************************************************************************************/
+		//3rd, read the bowtie output data line by line;
+		
+		System.out.println("Module 3: read-in bowtie_output data line by line.");
+		System.out.println("Create Chromosome objects base on the data read in from bowtie_output.");
+		System.out.println("Write Chromosome information into bowtie2BED document.");
 		
 		while(BowtieReader.hasNextLine()){
 			
@@ -106,15 +116,20 @@ public class Bowtie2BED_transfer_1003 {
 			
 		}//end of while() loop;
 		
+		System.out.println();
 		
-		//3rd, close all readers scanners and outputers.
-		System.out.println("Module 3: close all scanners inputers and output writers.");
+		/******************************************************************************************/
+		//4th, close all readers scanners and outputers.
+		System.out.println("Module 4: close all scanners inputers and output writers.");
 		input.close();
 		BowtieReader.close();
 		output.close();
 		
 		
 		System.out.println("Done!!");
+		System.out.println("The output file could be find at: ");
+		System.out.println(routine + document +"_bowtie2BED_" + chromosome +"_"+ date +".txt");
+		
 		
 	}//end main();
 	
