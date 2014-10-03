@@ -19,10 +19,10 @@ import java.util.Scanner;
  * 
  * From fastq to UCSC genomic browser then calculating the ratio between two sub-types:
  * step 1: from fastq to bowtie_output;
- * step 2: from bowtie_output to BED documents;
- * step 3: from BED to Bin documents;
- * step 4: submit the Bin documents to UCSC genomic browser;
- * step 5: calculate the ratio of reads between two sub-types;
+ * step 2: from bowtie_output to BED documents; 				[Bowtie2BED_***.java]
+ * step 3: from BED to Bin documents;           				[BED2Bin_***.java]
+ * step 4: submit the Bin**.txt documents to UCSC genomic browser;
+ * step 5: calculate the ratio of reads between two sub-types;	[RatioOfChromatinReads.java]
  * 
  * This is the step 2 from bowtie_output to BED documents;
  * 
