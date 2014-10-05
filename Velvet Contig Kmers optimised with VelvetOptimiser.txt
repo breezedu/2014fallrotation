@@ -1,0 +1,107 @@
+http://www.open-mpi.org/software/ompi/v1.8/downloads/openmpi-1.8.3.tar.bz2
+
+https://sparsehash.googlecode.com/files/sparsehash-2.0.2.tar.gz
+
+
+
+http://cryptodb.igsp.duke.edu/yjm993_R1.fastq
+
+http://cryptodb.igsp.duke.edu/yjm993_R2.fastq
+
+
+
+For K-mer optimizer:
+Final optimised assembly details:
+********************************************************
+Assembly id: 3
+Assembly score: 1625289
+Velveth timestamp: Sep 29 2014 18:13:32
+Velvetg timestamp: Sep 29 2014 18:36:39
+Velveth version: 1.2.10
+Velvetg version: 1.2.10
+Readfile(s): -shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+Velveth parameter string: auto_data_21 21 -shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+Velvetg parameter string: auto_data_21 -clean yes -exp_cov 3 -cov_cutoff 2.0497824
+Assembly directory: /home/guang/auto_data_21
+Velvet hash value: 21
+Roadmap file size: 23554239
+Total number of contigs: 13348
+n50: 678
+length of longest contig: 5740
+Total bases in contigs: 5694345
+Number of contigs > 1k: 1152
+Total bases in contigs > 1k: 1625289
+Paired Library insert stats:
+Paired-end library 1 has length: 5, sample standard deviation: 13
+Paired-end library 1 has length: 5, sample standard deviation: 13
+**********************************************************
+Assembly output files are in the following directory:
+/home/guang/auto_data_21
+root@guang-HP-Pavilion-dv2-Notebook-PC:/home/guang# Downloads/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 17 -e 33 -f '-shortPaired -fastq yjm993million.fastq yjm993million2.fastq'
+
+
+
+
+
+
+
+
+Final optimised assembly details:
+********************************************************
+Assembly id: 21
+Assembly score: 94022
+Velveth timestamp: Sep 29 2014 18:53:07
+Velvetg timestamp: Sep 29 2014 19:12:39
+Velveth version: 1.2.10
+Velvetg version: 1.2.10
+Readfile(s): -shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+Velveth parameter string: auto_data_75 75 -shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+Velvetg parameter string: auto_data_75 -clean yes -exp_cov 13 -cov_cutoff 1.29608265764191
+Assembly directory: /home/guang/auto_data_75
+Velvet hash value: 75
+Roadmap file size: 14313579
+Total number of contigs: 348
+n50: 935
+length of longest contig: 13324
+Total bases in contigs: 190025
+Number of contigs > 1k: 21
+Total bases in contigs > 1k: 94022
+Paired Library insert stats:
+Paired-end library 1 has length: 207, sample standard deviation: 431
+Paired-end library 1 has length: 207, sample standard deviation: 431
+**********************************************************
+Assembly output files are in the following directory:
+/home/guang/auto_data_75
+root@guang-HP-Pavilion-dv2-Notebook-PC:/home/guang# Downloads/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 35 -e 75 -f '-shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+
+
+
+
+
+Final optimised assembly details:
+********************************************************
+Assembly id: 4
+Assembly score: 89156
+Velveth timestamp: Sep 29 2014 19:14:50
+Velvetg timestamp: Sep 29 2014 19:19:26
+Velveth version: 1.2.10
+Velvetg version: 1.2.10
+Readfile(s): -shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+Velveth parameter string: auto_data_81 81 -shortPaired -fastq yjm993million.fastq yjm993million2.fastq
+Velvetg parameter string: auto_data_81 -clean yes -exp_cov 15 -cov_cutoff 2.00656292772518
+Assembly directory: /home/guang/auto_data_81
+Velvet hash value: 81
+Roadmap file size: 13286464
+Total number of contigs: 89
+n50: 2882
+length of longest contig: 13315
+Total bases in contigs: 112858
+Number of contigs > 1k: 26
+Total bases in contigs > 1k: 89156
+Paired Library insert stats:
+Paired-end library 1 has length: 42, sample standard deviation: 65
+Paired-end library 1 has length: 42, sample standard deviation: 65
+**********************************************************
+Assembly output files are in the following directory:
+/home/guang/auto_data_81
+root@guang-HP-Pavilion-dv2-Notebook-PC:/home/guang# Downloads/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 75 -e 93 -f '-shortPaired -fastq yjm993million.fastq yjm993million2.fastq'
