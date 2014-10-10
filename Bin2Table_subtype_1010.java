@@ -29,7 +29,13 @@ import java.util.Scanner;
  */
 
 public class Bin2Table_subtype_1010 {
-
+	
+	
+	/*************
+	 * Main()
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException{
 		
 		System.out.println("This is Bin2Table script.");
@@ -74,6 +80,8 @@ public class Bin2Table_subtype_1010 {
 	
 	
 	/*****************
+	 * run Bin2Table for each sub-type (WT/pUC/SetYL/SetRC;
+	 * 1st, build a hashMap for all bin-reads; record the upper-bound of each chromosome (2L, 2R, 3L, 3R, 4, and X);
 	 * 
 	 * @param routine
 	 * @param doc_name
@@ -82,14 +90,16 @@ public class Bin2Table_subtype_1010 {
 	 * @throws IOException
 	 */
 	private static void run(String routine, String doc_name, String chr_name, BufferedWriter output) throws IOException {
-		// TODO Auto-generated method stub
+		// TODO each bin span 1000 base-pairs, here we transfer each bin into each 'step';
+		// each window span 10,000 base-pairs (10 bins)
+		
 		
 		Scanner read_in = new Scanner(new File(routine +"/BED2Bin/" + doc_name + "_BED2Bin_" + chr_name +"_1000.txt"));
 		
 		String first_line = read_in.nextLine();
 		System.out.println("Line 106: FirstLine: " + first_line +"\n");
 		
-		//create a HashMap;
+		//create a HashMap, put bin-reads (or step-reads) into the HashMap;
 		HashMap<Long, Integer> binHash = new HashMap<Long, Integer>();
 		long upper_bound = 0;
 		
@@ -118,6 +128,11 @@ public class Bin2Table_subtype_1010 {
 		
 		
 		//after Building the HashMap, write_into Bin2Table.txt document;
+		/*************
+		 * check each step from 0 to the upper_bound;
+		 * calculate all 10 steps following current step, sum up the counts;
+		 * write-into output-txt document the current step index and total counts;
+		 */
 		long index = 0;
 		
 		while(index <= upper_bound){
@@ -136,6 +151,7 @@ public class Bin2Table_subtype_1010 {
 			index++;
 		}//end while index <= upper_bound loop;
 		
+		System.out.println("The output document could be found in:" +routine + "/Bin2Table/" + doc_name +"_Bin2Table_allChrs.txt" );
 		
 		
 		//close read_in scanner;
