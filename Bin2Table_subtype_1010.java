@@ -75,6 +75,7 @@ public class Bin2Table_subtype_1010 {
 		//4th, close output writter;
 		output.close();
 		input.close();
+		
 	}//end of main();
 
 	
@@ -113,6 +114,7 @@ public class Bin2Table_subtype_1010 {
 			//when there are more than 3 items in that line, update the bin HashMap
 			if(line_split.length > 2){
 				
+				//for each bin, there are 1000bps;
 				long bin_index = Integer.parseInt(line_split[1])/1000;
 				int count = Integer.parseInt(line_split[3]);
 				
@@ -138,7 +140,9 @@ public class Bin2Table_subtype_1010 {
 		while(index <= upper_bound){
 			
 			int count = 0;
+			
 			//the window is within 10*current index; 
+			//which makes the window 10,000bps in this case;
 			for(long j=index; j<index+10; j++){
 				
 				if(binHash.containsKey(j)){
