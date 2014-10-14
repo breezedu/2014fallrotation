@@ -1,0 +1,80 @@
+Installing BioPerl on Ubuntu Server
+
+For the generic instructions, see: Installing BioPerl on Unix.
+
+Version: Ubuntu Server 6.0.6
+Everything below was done as user root. To open a root shell under Ubuntu, login as a normal user, then type 'sudo su -'.
+
+Quick and dirty notes:
+Contents [hide] 
+1 Install and Configure a Basic Ubuntu Server
+2 Install as much as possible with apt-get
+3 Install CPAN and perl modules not available via apt-get
+4 Install BioPerl
+5 Install GBrowse
+6 Tests
+Install and Configure a Basic Ubuntu Server
+
+Do install then configure.
+apt-get clean
+apt-get update
+apt-get upgrade
+apt-get install ssh screen
+apt-get clean
+
+Install as much as possible with apt-get
+
+Enable Universe and Multiverse in /etc/apt/sources.list
+apt-get update
+apt-get install \
+ lynx unzip zip ncftp gcc libc6-dev make mysql-server apache2 \
+ perl libgd-gd2-perl libcgi-session-perl libclass-base-perl libexpat1-dev
+apt-get clean
+
+Install CPAN and perl modules not available via apt-get
+
+cpan -i 'Text::Shellwords'  # choose defaults if first time
+
+Install BioPerl
+
+cd /tmp
+wget -N http://bioperl.org/DIST/current_core_unstable.tar.bz2
+tar -xjvf current_core_unstable.tar.bz2
+cd bioperl-*
+perl Build.PL   # choose the defaults
+./Build test
+./Build install
+Install GBrowse
+
+cd /tmp/
+url='http://superb-west.dl.sourceforge.net/sourceforge/gmod/'
+wget "${url}/Generic-Genome-Browser-1.66.tar.gz"
+tar -xzvf Generic-Genome-Browser-*.tar.gz
+cd /tmp/Generic-Genome-Browser-*
+make clean
+perl Makefile.PL \
+ CONF=/etc/apache2/ \
+ HTDOCS=/var/www/ \
+ CGIBIN=/usr/lib/cgi-bin/
+make
+make test
+make install
+chown -R bioinfo.bioinfo /var/www/gbrowse/
+chmod g+w /var/www/gbrowse/databases/
+chown -R bioinfo.bioinfo /etc/apache2/gbrowse.conf/
+chmod g+w /etc/apache2/gbrowse.conf/
+Tests
+
+mysql --no-defaults -h localhost -e status
+lynx -dump http://localhost
+perl -e ';' -MCGI
+perl -e ';' -MGD
+perl -e ';' -MCGI::Session
+perl -e ';' -MDBI
+perl -e ';' -MDBD::mysql
+perl -e ';' -MDigest::MD5
+perl -e ';' -MText::Shellwords
+perl -e ';' -MClass::Base
+perl -e ';' -MBio::Seq
+lynx -dump http://localhost/gbrowse
+lynx -dump http://localhost/cgi-bin/gbrowse/yeast_chr1
