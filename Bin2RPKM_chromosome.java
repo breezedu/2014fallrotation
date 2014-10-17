@@ -8,21 +8,14 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**********************
- * Create a big table for each sub-type:
- * Chr ,Start, Counts
- * 2L, 1, xyz
- * 2L, 1000, xyz
- * .
- * .
- * .
- * 2L, 23000000, xyz
- * 2R, 1, xyz
- * 2R, 1000, xyz,
- * .
- * .
- * .
- * 2R, 24000000, xyz
- * 3L....
+ * Create a Bin2RPKM class
+ * Since some sub-type has more total reads than others
+ * it is not easy to compare two sub-types directly trough their Bin reads;
+ * So we are trying to use RPKM (reads per kb of sequence, per million mapped reads: RPKM)
+ * 
+ * RPKM = Reads / ((Window/width) * (total_read/1e+6));
+ * 
+ * The write the RPKM value into (take DM456, Chromosome 2L, Window=10000 for example) DM456_Bin2RPKM_2L_10000.txt;
  *
  * @author Jeff
  *
