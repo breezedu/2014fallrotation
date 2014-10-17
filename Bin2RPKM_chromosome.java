@@ -59,9 +59,9 @@ public class Bin2RPKM_chromosome {
 		
 		for(int i=0; i< chr_name.length; i++){
 			
-			run(routine, doc_name, chr_name[i], window);		
+			run_Bin2RPKM(routine, doc_name, chr_name[i], window);		
 		
-		}
+		}//end for i<chr_name.length loop;
 		
 		
 		//4th, close output writter;
@@ -83,18 +83,19 @@ public class Bin2RPKM_chromosome {
 	 * @param output
 	 * @throws IOException
 	 */
-	private static void run(String routine, String doc_name, String chr_name, int window) throws IOException {
+	private static void run_Bin2RPKM(String routine, String doc_name, String chr_name, int window) throws IOException {
 		// TODO each bin span 1000 base-pairs, here we transfer each bin into each 'step';
 		
-		//2nd, create an output_writer to write Bin document;
-		File output_file = new File(routine + "/Bin2RPKM/" + doc_name +"_Bin2RPKM_" + chr_name + "_" + window +".txt");
+		//1st, create an output_writer to write Bin document;
+		File output_file = new File(routine + "/Bin2RPKM/" + doc_name +"_Bin2RPKM_" + chr_name + "_" + window +"R.txt");
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));
 								
-		output.write("chr" + "\t" + "start_pos" + "\t" + "counts" + "\n");
-						
-				
+		//For R plot data, don't write te first line;
+		//output.write("chr" + "\t" + "start_pos" + "\t" + "counts" + "\n");
 		
-		// each window span 10,000 base-pairs (10 bins)
+		
+		
+		// each window span window/width base-pairs (10 bins)
 				
 		int width = 1000;
 		
@@ -149,7 +150,7 @@ public class Bin2RPKM_chromosome {
 			
 			//the window is within 10*current index; 
 			//which makes the window 10,000bps in this case;
-			for(long j=index; j<index+10; j++){
+			for(long j=index; j<index+window/width; j++){
 				
 				if(binHash.containsKey(j)){
 					count += binHash.get(j);
