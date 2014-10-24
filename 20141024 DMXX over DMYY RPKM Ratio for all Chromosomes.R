@@ -2,7 +2,7 @@
 
 doc_name1 = "DM436";
 doc_name2 = "DM435";
-chr = "3L"
+chr = "2L"
 routine = "http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1024/"; 
 
 
@@ -89,16 +89,19 @@ points(ratiotable35$reads*1000, main=title_ratio,cex=.3, col="red")
 
 #create a new window, partition to 3 parts
 X11()
-par(mfrow = c(3, 1), mar = c(2, 4, 3, 2))
+par(mfrow = c(2, 1), mar = c(2, 4, 3, 2))
 
 title_log = paste("Chr_", chr, doc_name1, "log2 Ratio:", doc_name1, "over", doc_name2, "10k");
 
 #plot the log2 ratio with filter:
-plot(log2(filter(ratiotable36$reads,rep(1,15)/15))-log2(filter(ratiotable35$reads, rep(1,15/15))), 
-		main=title_log,cex=.3)
+#plot(log2(filter(ratiotable36$reads,rep(1,15)/15))-log2(filter(ratiotable35$reads, rep(1,15/15))), 
+#		main=title_log,cex=.3)
+
 
 #add base line
-abline(h = 0, v = 0, col = "blue")
+#abline(h = 0, v = 0, col = "blue")
+
+
 
 
 #plot the log2 ratio without filter:
@@ -107,6 +110,10 @@ plot((log2(ratiotable36$reads)-log2(ratiotable35$reads)),
 
 abline(h = 0, v = 0, col = "blue")
 
+comp = (log2(ratiotable36$reads)-log2(ratiotable35$reads));
+length(which(comp > 1))
+length(which(comp < 1))
+
 #plot just the +1 if log2 ratio of DM436 is greater than DM435
 #           or -1 if log2 ratio of DM436 is less than DM435
 
@@ -114,5 +121,12 @@ plot((log2(ratiotable36$reads)-log2(ratiotable35$reads))/abs(log2(ratiotable36$r
        ylim=c(-5,5), main=title_log,cex=.3)
 
 abline(h = 0, v = 0, col = "blue")
+
+
+###############################
+###############################
+comp = (log2(ratiotable36$reads)-log2(ratiotable35$reads));
+length(which(comp > 1))
+length(which(comp < 1))
 
 
