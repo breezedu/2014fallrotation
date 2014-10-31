@@ -25,6 +25,7 @@ public class OverlapH2avAndLateregion {
 		
 		//let me do it in a super naive way first: bruce-force!
 		
+		//1st;
 		/****************************************************************************************
 		 * Create a late_region list of each chromosome;
 		 * for each chromosome, create a region list, then put all these lists into a total list* 
@@ -39,11 +40,12 @@ public class OverlapH2avAndLateregion {
 		
 		
 		
-		
+		//2nd;
 		/*****************************************************************************************
 		 * readIn chromosome distribution data from wiggle document:
-		 * 
-		 * 
+		 * create ratioLog2 object according to the data read;
+		 * put each ratioLog2 into corresponding arrayList;
+		 * put all arrayList into total ArrayList;
 		 */
 		ArrayList<ArrayList<ratioLog2>> ratioList = creatRatioArrayList();
 		
@@ -55,12 +57,111 @@ public class OverlapH2avAndLateregion {
 		
 		
 		
-		//
+		//3rd;
+		//traverse through all ratioLog2 objects, if the ratioLog2.getRatio()>=1, check the overlap with late_domain;
+		
+		checkOverlap(ratioList, regionList);
+		
+		
+		//end
 		
 	}//end main();
 	
 	
+	/**********************
+	 * Check the overlap of ratios greater than 1 to all late-domain chromosomes;
+	 * will call checkSingleRatio() method to check if one single ratio has overlap with any late-domain;
+	 * 
+	 * @param ratioList
+	 * @param regionList
+	 */
+	private static void checkOverlap(ArrayList<ArrayList<ratioLog2>> ratioList,	ArrayList<ArrayList<lateRegion>> regionList) {
+		// TODO Auto-generated method stub
+		int greaterThanOne = 0;
+		int overLapCount =0;
+		
+		for(int i=0; i<ratioList.size(); i++){
+			
+			for(int j=0; j<ratioList.get(i).size(); j++){
+				
+				ratioLog2 currRatio = ratioList.get(i).get(j);
+				
+				if(currRatio.getRatio() >= 1){
+					
+					greaterThanOne++;
+					
+					overLapCount += checkSingleRatio(currRatio, regionList);
+					
+				}//end if-condition;
+				
+			}//end for j<ratioList.get(i).size() loop;
+			
+		}//end for i<ratioList.size() loop;
+		
+		System.out.println("There are " + greaterThanOne + " ratios greater than one.");
+		System.out.println("The count of ratios overlap with late-domains is: " + overLapCount);
+		
+	}//end of checkOverlap() method;
+
+
+	/*******************************
+	 * check if a single ratio has overlap with any late-domain region;
+	 * will call checkSingleRatioSingleArrayList() method to check if that ratio object has overlap
+	 * with a specific Chromosome-late-domain arrayList;
+	 *  
+	 * @param Ratio
+	 * @param regionList
+	 * @return
+	 */
+	private static int checkSingleRatio(ratioLog2 Ratio, ArrayList<ArrayList<lateRegion>> regionList) {
+		// TODO Auto-generated method stub
+		int check = 0;
+		
+		switch(Ratio.getChromosome()){
+		
+		case "chr2L": check = checkSingleRatioSingleArrayList(Ratio, regionList.get(0)); break;
+		case "chr2R": check = checkSingleRatioSingleArrayList(Ratio, regionList.get(1)); break;
+		case "chr3L": check = checkSingleRatioSingleArrayList(Ratio, regionList.get(2)); break;
+		case "chr3R": check = checkSingleRatioSingleArrayList(Ratio, regionList.get(3)); break;
+		case "chrX":  check = checkSingleRatioSingleArrayList(Ratio, regionList.get(4)); break;
+
+		
+		}
+		
+		return check;
 	
+	}//end of checkSingleRatio() method;
+
+
+	/**********************************
+	 * check if a single ratio has overlap with a specific chromosome's late-domain region
+	 * @param ratio
+	 * @param lateRegionChr
+	 * @return
+	 */
+	private static int checkSingleRatioSingleArrayList(ratioLog2 ratio,	ArrayList<lateRegion> lateRegionChr) {
+		// TODO Auto-generated method stub
+		
+		int check = 0;		
+		int size = lateRegionChr.size();
+		
+		for(int i=0; i<size; i++){
+			
+			if(ratio.getPos() >= lateRegionChr.get(i).getStart() && ratio.getPos()<= lateRegionChr.get(i).getEnd())
+				check = 1;
+		}
+		
+		
+		return check;
+	}
+
+
+	/*********************************************
+	 * create ratioArrayList to store all ratio arrayLists for each chromosome;
+	 * 
+	 * @return ratioList
+	 * @throws FileNotFoundException
+	 */
 	private static ArrayList<ArrayList<ratioLog2>> creatRatioArrayList() throws FileNotFoundException {
 		// TODO create a ratioList and return it
 		ArrayList<ArrayList<ratioLog2>> ratioList = new ArrayList<ArrayList<ratioLog2>>();
