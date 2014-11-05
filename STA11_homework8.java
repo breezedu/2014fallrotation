@@ -1,4 +1,10 @@
 package rotation2014fall;
+/***********
+ * To calculate chi-squre : http://www.danielsoper.com/statcalc3/calc.aspx?id=12
+ * 
+ * @author Jeff
+ *
+ */
 
 public class STA11_homework8 {
 	
