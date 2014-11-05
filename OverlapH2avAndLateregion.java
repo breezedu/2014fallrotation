@@ -1,7 +1,10 @@
 package rotation2014fall;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,11 +24,11 @@ import java.util.Scanner;
  */
 public class OverlapH2avAndLateregion {
 	
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) throws IOException{
 		
 		//let me do it in a super naive way first: bruce-force!
 		
-		//1st;
+		//1st, create a late_region ArrayList to store all LateRegion objects;
 		/****************************************************************************************
 		 * Create a late_region list of each chromosome;
 		 * for each chromosome, create a region list, then put all these lists into a total list* 
@@ -40,7 +43,7 @@ public class OverlapH2avAndLateregion {
 		
 		
 		
-		//2nd;
+		//2nd, create a ratioLog2 ArrayList to store all ratioLog2 objects;
 		/*****************************************************************************************
 		 * readIn chromosome distribution data from wiggle document:
 		 * create ratioLog2 object according to the data read;
@@ -57,10 +60,17 @@ public class OverlapH2avAndLateregion {
 		
 		
 		
-		//3rd;
+		//3rd, check Overlap of each ratioLog2 object with Late-regions;
 		//traverse through all ratioLog2 objects, if the ratioLog2.getRatio()>=1, check the overlap with late_domain;
 		
 		checkOverlap(ratioList, regionList);
+		
+		
+		
+		
+		//4th, statistic regions with H2Avs:
+		
+		statLateRegions(regionList);
 		
 		
 		//end
@@ -68,6 +78,63 @@ public class OverlapH2avAndLateregion {
 	}//end main();
 	
 	
+	/**********************
+	 * Statistic late region with H2Av vs Late region without H2Av;
+	 * @param regionList
+	 * @throws IOException 
+	 */
+	private static void statLateRegions(ArrayList<ArrayList<lateRegion>> regionList) throws IOException {
+		// TODO Auto-generated method stub
+		String routine = "D:/2014FallRotation/data/yulong/1029/RPKM2Wiggle/";
+		String doc_name = "LateRegionWithH2Av_cutoff05.txt";
+		
+		File output_file = new File(routine + doc_name);
+		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));		
+		
+		String firstLine = "track name=\"Late-WH2Av_05\" description=\"Late-withH2Av_05\" visibility=1 color=102,0,106";
+		
+		output.write(firstLine + "\n");
+		
+		int ChrNum = regionList.size();
+		int totalLateRegions = 0;
+		int totalLateRegionsWH2Av = 0;
+		
+		for(int i=0; i<ChrNum; i++){			
+						
+			int size = regionList.get(i).size();
+			
+			int regionWithH2Av = 0;
+			int LateRegions = size;
+			
+			for(int j=0; j<size; j++){
+				
+				lateRegion currRegion = regionList.get(i).get(j); 
+				
+				if(currRegion.getH2Avs()) {
+					
+					regionWithH2Av++;
+					output.write(currRegion.getChromosome() +"\t" + currRegion.getStart() + "\t" + currRegion.getEnd() +"\n");
+				}
+				
+			}//end inner for j<size loop;		
+			
+			
+			System.out.println(regionList.get(i).get(0).getChromosome() + " Late Regions with H2Av: " + regionWithH2Av +". Total late regions " + LateRegions );
+			
+			totalLateRegions += LateRegions;
+			totalLateRegionsWH2Av += regionWithH2Av;
+			
+		}//end for i<ChrNum loop;
+		
+		System.out.println("In total, LateRegions are: " + totalLateRegions +"; LateRegions with H2Avs are: " + totalLateRegionsWH2Av +".");
+		
+		
+		//close output writter;
+		output.close();
+		
+	}//end of statLateRegions()
+
+
 	/**********************
 	 * Check the overlap of ratios greater than 1 to all late-domain chromosomes;
 	 * will call checkSingleRatio() method to check if one single ratio has overlap with any late-domain;
@@ -86,7 +153,8 @@ public class OverlapH2avAndLateregion {
 				
 				ratioLog2 currRatio = ratioList.get(i).get(j);
 				
-				if(currRatio.getRatio() >= 1){
+				//Here is the Log2Ratio difference:
+				if(currRatio.getRatio() >= 0.5){
 					
 					greaterThanOne++;
 					
@@ -135,6 +203,8 @@ public class OverlapH2avAndLateregion {
 
 	/**********************************
 	 * check if a single ratio has overlap with a specific chromosome's late-domain region
+	 * if YES, update that lateRegion object's H2Avs parameter from False to True;
+	 * 			make check = 1;
 	 * @param ratio
 	 * @param lateRegionChr
 	 * @return
@@ -147,13 +217,19 @@ public class OverlapH2avAndLateregion {
 		
 		for(int i=0; i<size; i++){
 			
-			if(ratio.getPos() >= lateRegionChr.get(i).getStart() && ratio.getPos()<= lateRegionChr.get(i).getEnd())
+			if(ratio.getPos() >= lateRegionChr.get(i).getStart() && ratio.getPos()<= lateRegionChr.get(i).getEnd()){
+				
 				check = 1;
-		}
+				lateRegionChr.get(i).setH2Avs(true);
+				
+			}
+
+		}//end for i<size loop;
 		
 		
 		return check;
-	}
+		
+	}//end checkSingleRatioSingleArrayList() method;
 
 
 	/*********************************************
@@ -365,6 +441,7 @@ class lateRegion{
 	private String chromosome;
 	private int start;
 	private int end;
+	private boolean H2Avs;
 	
 	public lateRegion(String chromosome, int start, int end){
 		super();
@@ -372,6 +449,7 @@ class lateRegion{
 		this.chromosome = chromosome;
 		this.start = start;
 		this.end = end;
+		this.H2Avs = false;
 		
 	}
 	
@@ -398,6 +476,14 @@ class lateRegion{
 	
 	public int getEnd(){
 		return this.end;
+	}
+	
+	public void setH2Avs(boolean H2Avs){
+		this.H2Avs = H2Avs;
+	}
+	
+	public boolean getH2Avs(){
+		return this.H2Avs;
 	}
 	
 	
