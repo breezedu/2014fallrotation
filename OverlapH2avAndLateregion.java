@@ -86,7 +86,14 @@ public class OverlapH2avAndLateregion {
 	private static void statLateRegions(ArrayList<ArrayList<lateRegion>> regionList) throws IOException {
 		// TODO Auto-generated method stub
 		String routine = "D:/2014FallRotation/data/yulong/1029/RPKM2Wiggle/";
-		String doc_name = "LateRegionWithH2Av_cutoff05.txt";
+		
+		//ask user to input doc_name, to mark cutoff value;
+	//	Scanner input2 = new Scanner(System.in);
+	//	System.out.print("Please input the document name of output doc:[LateRegionWithH2Av_cutoff05.txt] \n doc_name: ");
+		
+	//	String doc_name = input2.next();
+		
+		String doc_name = "LateRegionWithH2Av_cutoff0.05.txt";
 		
 		File output_file = new File(routine + doc_name);
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));		
@@ -131,6 +138,7 @@ public class OverlapH2avAndLateregion {
 		
 		//close output writter;
 		output.close();
+	//	input2.close();
 		
 	}//end of statLateRegions()
 
@@ -138,12 +146,17 @@ public class OverlapH2avAndLateregion {
 	/**********************
 	 * Check the overlap of ratios greater than 1 to all late-domain chromosomes;
 	 * will call checkSingleRatio() method to check if one single ratio has overlap with any late-domain;
-	 * 
+	 * Ask user to input the cutoff value: Log2Ratio = 1, 0.5, 0.25, 0.05 etc...
 	 * @param ratioList
 	 * @param regionList
 	 */
 	private static void checkOverlap(ArrayList<ArrayList<ratioLog2>> ratioList,	ArrayList<ArrayList<lateRegion>> regionList) {
 		// TODO Auto-generated method stub
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Please input the cutoff value: [1.0, 0.5, 0.25, 0.05 etc] \n cutoff = ");
+		double cutoff = input.nextDouble();
+		
 		int greaterThanOne = 0;
 		int overLapCount =0;
 		
@@ -154,7 +167,7 @@ public class OverlapH2avAndLateregion {
 				ratioLog2 currRatio = ratioList.get(i).get(j);
 				
 				//Here is the Log2Ratio difference:
-				if(currRatio.getRatio() >= 0.5){
+				if(currRatio.getRatio() >= cutoff){
 					
 					greaterThanOne++;
 					
@@ -168,6 +181,10 @@ public class OverlapH2avAndLateregion {
 		
 		System.out.println("There are " + greaterThanOne + " ratios greater than one.");
 		System.out.println("The count of ratios overlap with late-domains is: " + overLapCount);
+		
+		
+		//close input scanner
+		input.close();
 		
 	}//end of checkOverlap() method;
 
@@ -192,7 +209,7 @@ public class OverlapH2avAndLateregion {
 		case "chr3L": check = checkSingleRatioSingleArrayList(Ratio, regionList.get(2)); break;
 		case "chr3R": check = checkSingleRatioSingleArrayList(Ratio, regionList.get(3)); break;
 		case "chrX":  check = checkSingleRatioSingleArrayList(Ratio, regionList.get(4)); break;
-
+		
 		
 		}
 		
