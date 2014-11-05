@@ -44,11 +44,21 @@ public class RPKM2Wig_Chromosome_1029 {
 	
 	public static void main(String[] args) throws IOException{
 		
-		String routine = "D:/2014FallRotation/data/yulong/";
-		String date = "1029";
-		String document = "DM436OVERDM435";
+		//ask user to input two documents, and the window range;
+		Scanner input = new Scanner(System.in);
 		
-		int window = 50000;
+		System.out.print("Please input doc_one: [DM457, DM458, DM459 etc] \n doc_one: " );
+		String doc_one = input.next();
+		System.out.print("Please input doc_two: [DM456, DM460, or DM435]\n doc_two: " );
+		String doc_two = input.next();
+		
+		
+		String routine = "D:/2014FallRotation/data/yulong/";
+		String date = "1105";
+		String document = doc_one + "OVER" + doc_two;
+		
+		System.out.print("Please input the window range:[10,000 or 50,000] \n window = ");
+		int window = input.nextInt();
 		
 		String[] chromosome = {"2L", "2R", "3L", "3R", "X"};
 		
@@ -57,7 +67,7 @@ public class RPKM2Wig_Chromosome_1029 {
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));
 		
 		//First line of wiggle format document: track type=wiggle_0 name=Test description="My test"
-		String firstLine = "track type=wiggle_0 name=Test_" + window+ " description=\"" +window+ "_test\"";
+		String firstLine = "track type=wiggle_0 name=436over435_" + window+ " description=\"" +window+ "_test\"";
 		output.write(firstLine + "\n");
 		
 		System.out.println();
@@ -72,27 +82,29 @@ public class RPKM2Wig_Chromosome_1029 {
 			output.write(addLine + "\n");
 			//output.write(4500 +"\t" + 0.543 + "\n");
 			
-			writeChromosomeWiggle(chromosome[i], window, output);
+			writeChromosomeWiggle(chromosome[i], window, doc_one, doc_two, output);
 			
 		}
 		
+		System.out.println("document could be found:" +routine +date+"/RPKM2Wiggle/" + document +"_wiggle_" + window +".txt");
 		
 		
-		//close output writer
+		//close output writer and input scanner;
 		output.close();
+		input.close();
 		
 	}//end main();
 	
 	
 	
-	private static void writeChromosomeWiggle(String chromosome, int window, BufferedWriter output) throws IOException {
+	private static void writeChromosomeWiggle(String chromosome, int window, String doc_one, String doc_two, BufferedWriter output) throws IOException {
 		// TODO Auto-generated method stub
 		//the routine is: D:\2014FallRotation\data\yulong\1010\Bin2RPKM
 		//the two data-documents were DM436_Bin2RPKM_ +chromosome +_10000R.txt
 		
 		String routine = "D:/2014FallRotation/data/yulong/1010/Bin2RPKM/";
-		String doc1 = "DM436_Bin2RPKM_" + chromosome + "_" + window +"R.txt";
-		String doc2 = "DM435_Bin2RPKM_" + chromosome + "_" + window +"R.txt";
+		String doc1 = doc_one + "_Bin2RPKM_" + chromosome + "_" + window +"R.txt";
+		String doc2 = doc_two + "_Bin2RPKM_" + chromosome + "_" + window +"R.txt";
 		
 		//create 2 scanners to read RPKM values from two documents;
 		Scanner rpkmReader1 = new Scanner(new File(routine + doc1));
