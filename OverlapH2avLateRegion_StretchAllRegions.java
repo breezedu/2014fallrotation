@@ -44,7 +44,7 @@ public class OverlapH2avLateRegion_StretchAllRegions {
 		}
 		
 		
-		//1.5th, enlarge all late regions 10% ahead;
+		//1.5th, enlarge all late regions 20% ahead, 10% after;
 		//if a late-region span 100-200, make it 90-200:
 		regionList = enlargeRegion(regionList);
 		
