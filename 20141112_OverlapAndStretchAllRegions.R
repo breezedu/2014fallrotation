@@ -6,11 +6,11 @@
 
 
 #Read data:
-ratiotable10 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1112/StretchRegionWithH2Av_cutoff1.0.txt", sep="\t", col.names=c("index", "reads"))
+ratiotable10 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1114/StretchRegionWithTime_cutoff1.0.txt", sep="\t", col.names=c("index", "reads"))
 
-ratiotable05 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1112/StretchRegionWithH2Av_cutoff0.5.txt", sep="\t", col.names=c("index", "reads"))
+ratiotable05 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1114/StretchRegionWithTime_cutoff0.5.txt", sep="\t", col.names=c("index", "reads"))
 
-ratiotable005 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1112/StretchRegionWithH2Av_cutoff0.05.txt", sep="\t", col.names=c("index", "reads"))
+ratiotable005 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1114/StretchRegionWithTime_cutoff0.05.txt", sep="\t", col.names=c("index", "reads"))
 
 
 #######################
