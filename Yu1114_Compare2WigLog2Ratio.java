@@ -1,7 +1,9 @@
 package rotation2014fall;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +16,7 @@ import java.util.Scanner;
  */
 public class Yu1114_Compare2WigLog2Ratio {
 
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) throws IOException{
 		
 		System.out.println("Readin two wig files, compare their log2 ratios.");
 		
@@ -24,10 +26,10 @@ public class Yu1114_Compare2WigLog2Ratio {
 		
 		Scanner input = new Scanner(System.in);
 		
-		System.out.print("Please input the document one: [DM432.wig] \n Doc_One: ");
+		System.out.print("Please input the document one: [DM432] \n Doc_One: ");
 		String doc_name1 = input.next();
 		
-		System.out.print("Please input the document two: [DM431.wig] \n Doc_Two: ");
+		System.out.print("Please input the document two: [DM431] \n Doc_Two: ");
 		String doc_name2 = input.next();
 		
 		System.out.print("Please indicate the size of window: [10,000, 50,000] \n Window: " );
@@ -40,8 +42,8 @@ public class Yu1114_Compare2WigLog2Ratio {
 		
 		//2nd, scan data from documents:
 		//create 2 scanners to readin data from two documents just inputed
-		Scanner readIn1 = new Scanner(new File(routine + doc_name1));
-		Scanner readIn2 = new Scanner(new File(routine + doc_name2));
+		Scanner readIn1 = new Scanner(new File(routine + doc_name1 +".wig"));
+		Scanner readIn2 = new Scanner(new File(routine + doc_name2 +".wig"));
 		
 		
 		
@@ -54,7 +56,7 @@ public class Yu1114_Compare2WigLog2Ratio {
 		
 		
 		//4th, calculateLog2Ratio;
-		calculateLog2Ratio(oneList, twoList);
+		calculateLog2Ratio(oneList, twoList, routine, doc_name1, doc_name2);
 		
 		
 		//close Scanners
@@ -66,12 +68,54 @@ public class Yu1114_Compare2WigLog2Ratio {
 	
 	
 
-	private static void calculateLog2Ratio(ArrayList<Double> oneList, ArrayList<Double> twoList) {
+	private static void calculateLog2Ratio(ArrayList<Double> oneList, ArrayList<Double> twoList, String routine, String doc_name1, String doc_name2) throws IOException {
 		// TODO Auto-generated method stub
 		
+		String doc_name = doc_name1 + "over" + doc_name2+".wig";
+		
+		File output_file = new File(routine + doc_name);
+		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));	
+		
+		String subtitle = doc_name1 + "Over" + doc_name2;
+		
+		String firstLine = "track type=wiggle_0 name=" +subtitle +" description=\"" + subtitle + "\"";
+		String secondLine = "variableStep chrom=chr2L";
+		output.write(firstLine + "\n");
+		output.write(secondLine + "\n");
+		
+		double log2 = Math.log(2);
+		int size = oneList.size();
+		
+		for(int i=0; i<size; i++){
+			
+			/***
+			double log2ratio = 0;
+			
+			for(int j=i; j<i+500; j++){
+				double value1 = oneList.get(j)+1;
+				double value2 = twoList.get(j)+1;
+				
+				log2ratio += (Math.log(value1) - Math.log(value2)) / log2;
+
+			}//end for j loop;
+			
+			*/
+			
+			double value1 = oneList.get(i)+1;
+			double value2 = twoList.get(i)+1;
+			
+			double log2ratio = (Math.log(value1) - Math.log(value2)) / log2;
+			
+			
+			output.write((i*250+1) + "\t" + log2ratio + "\n");
+			
+		}//end for i loop;
 		
 		
-	}
+		System.out.println("document could be found: " + routine + doc_name);
+		output.close();
+		
+	}//
 
 
 
