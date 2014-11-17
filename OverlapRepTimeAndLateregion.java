@@ -115,7 +115,7 @@ public class OverlapRepTimeAndLateregion {
 		*/
 		System.out.println("stretch late Regions.");
 		
-		int[] regionReads = new int[100];
+		int[] regionReads = new int[101];
 		for(int i=0; i<100; i++){
 			regionReads[i] = 0;
 		}
@@ -274,6 +274,9 @@ public class OverlapRepTimeAndLateregion {
 	private static void checkOverlap(ArrayList<ArrayList<posTime>> ratioList, ArrayList<ArrayList<lateRegion>> regionList, double cutoff) {
 		// TODO Auto-generated method stub
 
+		System.out.println("Check Overlap.");
+		System.out.println("ratioList: " + ratioList.size() +", " + ratioList.get(0).size());
+		
 		int greaterThanCut = 0;
 		int overLapCount =0;
 		
@@ -373,7 +376,7 @@ public class OverlapRepTimeAndLateregion {
 		// TODO create a ratioList and return it
 		ArrayList<ArrayList<posTime>> ratioList = new ArrayList<ArrayList<posTime>>();
 		
-		ArrayList<posTime> ratio_2L = new ArrayList<posTime>();
+		ArrayList<posTime> posTime_2L = new ArrayList<posTime>();
 		ArrayList<posTime> ratio_2R = new ArrayList<posTime>();		
 		ArrayList<posTime> ratio_3L = new ArrayList<posTime>();
 		ArrayList<posTime> ratio_3R = new ArrayList<posTime>();
@@ -398,7 +401,7 @@ public class OverlapRepTimeAndLateregion {
 			String[] str = currLine.split(",");
 				
 			int pos = Integer.parseInt(str[1]);
-			String chrName = str[0];
+			String chrName = "chr" + str[0]; 			//System.out.println(" " + str[0]);
 			
 			double time = Double.parseDouble(str[1]);
 				
@@ -406,7 +409,7 @@ public class OverlapRepTimeAndLateregion {
 				
 			switch(newRatio.getChromosome()){
 				
-			case "chr2L": ratio_2L.add(newRatio); break;
+			case "chr2L": posTime_2L.add(newRatio); break;
 			case "chr2R": ratio_2R.add(newRatio); break;
 			case "chr3L": ratio_3L.add(newRatio); break;
 			case "chr3R": ratio_3R.add(newRatio); break;
@@ -418,7 +421,7 @@ public class OverlapRepTimeAndLateregion {
 		}//end while loop;
 		
 		//add all ratio_chromosome lists to the ratioList ArrayList;
-		ratioList.add(ratio_2L);
+		ratioList.add(posTime_2L);
 		ratioList.add(ratio_2R);
 		ratioList.add(ratio_3L);
 		ratioList.add(ratio_3R);
