@@ -431,9 +431,11 @@ public class OverlapRepTimeAndLateregion {
 			String[] str = currLine.split(",");
 				
 			int pos = Integer.parseInt(str[1]);
-			String chrName = "chr" + str[0]; 			//System.out.println(" " + str[0]);
+			String chrName = "chr" + str[0]; 		//	System.out.println(" " + str[0] +"\t" + str[1] +"\t" + str[2]);
 			
-			double time = Double.parseDouble(str[1]);
+			double time = 0;
+			
+			if(!str[2].equals("NA")) time = Double.parseDouble(str[2]);
 				
 			posTime newRatio = new posTime(chrName, pos, time);
 				
