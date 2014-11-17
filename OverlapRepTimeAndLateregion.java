@@ -115,6 +115,13 @@ public class OverlapRepTimeAndLateregion {
 		*/
 		System.out.println("stretch late Regions.");
 		
+		String routine = "D:/2014FallRotation/data/yulong/1117/";
+		String doc_name = "StretchRegionWithTime_cutoff" + cutoff +".txt";
+		
+	//	String doc_timeing = "timingOverlap.txt";
+		
+		
+		
 		int[] regionReads = new int[101];
 		for(int i=0; i<100; i++){
 			regionReads[i] = 0;
@@ -136,8 +143,7 @@ public class OverlapRepTimeAndLateregion {
 		
 		
 		//output regionReads[] array into a txt document;
-		String routine = "D:/2014FallRotation/data/yulong/1114/";
-		String doc_name = "StretchRegionWithTime_cutoff" + cutoff +".txt";
+		
 		
 		File output_file = new File(routine + doc_name);
 		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));		
@@ -270,10 +276,24 @@ public class OverlapRepTimeAndLateregion {
 	 * Ask user to input the cutoff value: Log2Ratio = 1, 0.5, 0.25, 0.05 etc...
 	 * @param ratioList
 	 * @param regionList
+	 * @throws IOException 
 	 */
-	private static void checkOverlap(ArrayList<ArrayList<posTime>> ratioList, ArrayList<ArrayList<lateRegion>> regionList, double cutoff) {
+	private static void checkOverlap(ArrayList<ArrayList<posTime>> ratioList, ArrayList<ArrayList<lateRegion>> regionList, double cutoff) throws IOException {
 		// TODO Auto-generated method stub
+		
+		String routine = "D:/2014FallRotation/data/yulong/1117/";
+		String doc_name = "timeOverlap.txt";
 
+		File output_file = new File(routine + doc_name);
+		BufferedWriter output = new BufferedWriter(new FileWriter(output_file));	
+		
+		String subtitle = "timeOverlap";
+		
+		String firstLine = "track type=wiggle_0 name=" +subtitle +" description=\"" + subtitle + "\"";
+		String secondLine = "variableStep chrom=";
+		
+		output.write(firstLine + "\n");
+		
 		System.out.println("Check Overlap.");
 		System.out.println("ratioList: " + ratioList.size() +", " + ratioList.get(0).size());
 		
@@ -281,6 +301,9 @@ public class OverlapRepTimeAndLateregion {
 		int overLapCount =0;
 		
 		for(int i=0; i<ratioList.size(); i++){
+			
+			String chromosome = ratioList.get(i).get(0).getChromosome();
+			output.write(secondLine + chromosome +"\n");
 			
 			for(int j=0; j<ratioList.get(i).size(); j++){
 				
@@ -290,6 +313,12 @@ public class OverlapRepTimeAndLateregion {
 				if(currRatio.getRatio() >= cutoff){
 					
 					greaterThanCut++;
+					
+					if(checkSingleRatio(currRatio, regionList) == 1){
+						
+						overLapCount ++;
+						output.write(currRatio.getPos() +"\t" + currRatio.getRatio() + "\n");
+					}
 					
 					overLapCount += checkSingleRatio(currRatio, regionList);
 					
@@ -302,6 +331,7 @@ public class OverlapRepTimeAndLateregion {
 		System.out.println("There are " + greaterThanCut + " ratios greater than cutoff.");
 		System.out.println("The count of ratios overlap with late-domains is: " + overLapCount);
 		
+		output.close();
 		
 	}//end of checkOverlap() method;
 
