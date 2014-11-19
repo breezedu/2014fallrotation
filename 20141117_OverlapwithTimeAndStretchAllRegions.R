@@ -2,11 +2,11 @@
 #read in data from url: http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1117/
 
 
-#local routine = "D:/2014FallRotation/data/yulong/1117/RPKM2Wiggle/StretchRegionWithTime_cutoff0.05.txt"; 
+#local routine = "D:/2014FallRotation/data/yulong/1117/RPKM2Wiggle/StretchRegionWithTime_cutoff0.txt"; 
 
 
 #Read data:
-ratiotable10 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1117/StretchRegionWithTime_cutoff1.0.txt", sep="\t", col.names=c("index", "reads"))
+ratiotable10 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1117/StretchRegionWithTime_cutoff1.0E-4.txt", sep="\t", col.names=c("index", "reads"))
 
 ratiotable05 = read.table("http://alchemy.duhs.duke.edu/~gd44/Yulong/Yulong_1117/StretchRegionWithTime_cutoff0.5.txt", sep="\t", col.names=c("index", "reads"))
 

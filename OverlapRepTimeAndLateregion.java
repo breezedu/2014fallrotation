@@ -122,8 +122,8 @@ public class OverlapRepTimeAndLateregion {
 		
 		
 		
-		int[] regionReads = new int[101];
-		for(int i=0; i<100; i++){
+		double[] regionReads = new double[101];
+		for(int i=0; i<101; i++){
 			regionReads[i] = 0;
 		}
 		
@@ -133,7 +133,7 @@ public class OverlapRepTimeAndLateregion {
 				
 				posTime currRatio = ratioList.get(i).get(j);
 				
-				if(currRatio.getRatio() >= cutoff){
+				if(currRatio.getTime() >= cutoff){
 					
 					stretchSingleRegion(currRatio, regionReads, regionList);
 				}
@@ -161,23 +161,23 @@ public class OverlapRepTimeAndLateregion {
 	}//end of stretchLateRegions() method;
 
 
-	private static void stretchSingleRegion(posTime Ratio, int[] regionReads, ArrayList<ArrayList<lateRegion>> regionList) {
+	private static void stretchSingleRegion(posTime posTime, double[] regionReads, ArrayList<ArrayList<lateRegion>> regionList) {
 		// TODO Auto-generated method stub
 		
 		int stretchPoint = 0;
 		
-		switch(Ratio.getChromosome()){
+		switch(posTime.getChromosome()){
 		
-		case "chr2L": stretchPoint = stretchSingleRatioSingleArrayList(Ratio, regionList.get(0)); break;
-		case "chr2R": stretchPoint = stretchSingleRatioSingleArrayList(Ratio, regionList.get(1)); break;
-		case "chr3L": stretchPoint = stretchSingleRatioSingleArrayList(Ratio, regionList.get(2)); break;
-		case "chr3R": stretchPoint = stretchSingleRatioSingleArrayList(Ratio, regionList.get(3)); break;
-		case "chrX":  stretchPoint = stretchSingleRatioSingleArrayList(Ratio, regionList.get(4)); break;
+		case "chr2L": stretchPoint = stretchSingleRatioSingleArrayList(posTime, regionList.get(0)); break;
+		case "chr2R": stretchPoint = stretchSingleRatioSingleArrayList(posTime, regionList.get(1)); break;
+		case "chr3L": stretchPoint = stretchSingleRatioSingleArrayList(posTime, regionList.get(2)); break;
+		case "chr3R": stretchPoint = stretchSingleRatioSingleArrayList(posTime, regionList.get(3)); break;
+		case "chrX":  stretchPoint = stretchSingleRatioSingleArrayList(posTime, regionList.get(4)); break;
 				
 		}
 		
 		if(stretchPoint>-1)
-			regionReads[stretchPoint] = regionReads[stretchPoint] + 1;
+			regionReads[stretchPoint] = regionReads[stretchPoint] + posTime.getTime();
 	
 	}//end stretchSingleRegion() method;
 
@@ -310,14 +310,14 @@ public class OverlapRepTimeAndLateregion {
 				posTime currRatio = ratioList.get(i).get(j);
 				
 				//Here is the Log2Ratio difference:
-				if(currRatio.getRatio() >= cutoff){
+				if(currRatio.getTime() >= cutoff){
 					
 					greaterThanCut++;
 					
 					if(checkSingleRatio(currRatio, regionList) == 1){
 						
 						overLapCount ++;
-						output.write(currRatio.getPos() +"\t" + currRatio.getRatio() + "\n");
+						output.write(currRatio.getPos() +"\t" + currRatio.getTime() + "\n");
 					}
 					
 					overLapCount += checkSingleRatio(currRatio, regionList);
@@ -407,10 +407,10 @@ public class OverlapRepTimeAndLateregion {
 		ArrayList<ArrayList<posTime>> ratioList = new ArrayList<ArrayList<posTime>>();
 		
 		ArrayList<posTime> posTime_2L = new ArrayList<posTime>();
-		ArrayList<posTime> ratio_2R = new ArrayList<posTime>();		
-		ArrayList<posTime> ratio_3L = new ArrayList<posTime>();
-		ArrayList<posTime> ratio_3R = new ArrayList<posTime>();
-		ArrayList<posTime> ratio_X = new ArrayList<posTime>();
+		ArrayList<posTime> posTime_2R = new ArrayList<posTime>();		
+		ArrayList<posTime> posTime_3L = new ArrayList<posTime>();
+		ArrayList<posTime> posTime_3R = new ArrayList<posTime>();
+		ArrayList<posTime> posTime_X = new ArrayList<posTime>();
 		
 		
 		//create a scanner to readIn ratio data from D:\2014FallRotation\data\yulong\1114\
@@ -442,10 +442,10 @@ public class OverlapRepTimeAndLateregion {
 			switch(newRatio.getChromosome()){
 				
 			case "chr2L": posTime_2L.add(newRatio); break;
-			case "chr2R": ratio_2R.add(newRatio); break;
-			case "chr3L": ratio_3L.add(newRatio); break;
-			case "chr3R": ratio_3R.add(newRatio); break;
-			case "chrX":  ratio_X.add(newRatio);  break;
+			case "chr2R": posTime_2R.add(newRatio); break;
+			case "chr3L": posTime_3L.add(newRatio); break;
+			case "chr3R": posTime_3R.add(newRatio); break;
+			case "chrX":  posTime_X.add(newRatio);  break;
 				
 			}//end switch;
 				
@@ -454,10 +454,10 @@ public class OverlapRepTimeAndLateregion {
 		
 		//add all ratio_chromosome lists to the ratioList ArrayList;
 		ratioList.add(posTime_2L);
-		ratioList.add(ratio_2R);
-		ratioList.add(ratio_3L);
-		ratioList.add(ratio_3R);
-		ratioList.add(ratio_X);
+		ratioList.add(posTime_2R);
+		ratioList.add(posTime_3L);
+		ratioList.add(posTime_3R);
+		ratioList.add(posTime_X);
 		
 		//close readIn scanner
 		readIn.close();
@@ -578,11 +578,11 @@ class posTime{
 		return this.pos;
 	}
 	
-	public void setRatio(double time){
+	public void setTime(double time){
 		this.time = time;
 	}
 	
-	public double getRatio(){
+	public double getTime(){
 		return this.time;
 	}
 	
