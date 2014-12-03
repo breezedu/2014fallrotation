@@ -75,9 +75,9 @@ plot((ratiotableTime0.05$reads),type = "l",ann=F, cex=.3, xaxt="n", yaxt="n", co
 legend("topright", legend = c("timing", "H2Av"), lty = 1, lwd=2, col=c("blue", "black") )
 
 
-
+dev.off()
 #close the png figure plotting
-#dev.off()
+dev.off()
 
 
 #############################
