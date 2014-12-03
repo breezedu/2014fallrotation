@@ -37,16 +37,16 @@ plot((ratiotable005$reads),type = "l", main= title3, cex=.3)
 
 X11()
 #plot the figure for cutoff=1.0 
-title1 = ( "cutoff 0.0001")
+title1 = ( "overlap of time & lateRegion cutoff 0.0001")
 plot((ratiotable10$reads),type = "l", main= title1, cex=.3)
 
 X11()
 #plot the figure for cutoff=0.5 
-title2 = ( "cutoff 0.05")
+title2 = ( "overlap of time & lateRegion cutoff 0.05")
 plot((ratiotable05$reads),type = "l", main= title2, cex=.3)
 
 X11()
 #plot the figure for cutoff=0.05
-title3 = ( "cutoff 0")
+title3 = ( "overlap of time & lateRegion cutoff 0")
 plot((ratiotable005$reads),type = "l", main= title3, cex=.3)
 
